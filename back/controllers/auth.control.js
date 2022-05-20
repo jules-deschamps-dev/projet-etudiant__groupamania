@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const sequelize = require("../models/auth.model");
+require("../models/auth.model");
 require("mysql2");
 require("body-parser");
 

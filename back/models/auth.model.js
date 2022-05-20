@@ -15,9 +15,6 @@ const User = sequelize.define("users", {
   updatedAt: Sequelize.DATE,
 });
 
-// Exporting User, using this constant
-// we can perform CRUD operations on
-// 'user' table.
 module.exports = User;
 
 /*
