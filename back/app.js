@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/auth.route");
 require("dotenv").config({ path: "./config/.env" });
 const db = require("./config/db.config");
+const { Sequelize } = require("sequelize");
 
 const app = express();
 app.use(express.json());
@@ -22,7 +23,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//db.sync();
+db.sync();
 
 app.use("/api/user", userRoutes);
 module.exports = app;

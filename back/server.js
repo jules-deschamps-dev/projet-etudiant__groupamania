@@ -1,7 +1,6 @@
 const express = require("express");
 const http = require("http");
 const app = require("./app");
-const db = require("./models/auth.model");
 
 const normalizePort = (val) => {
   const port = parseInt(val, 10);

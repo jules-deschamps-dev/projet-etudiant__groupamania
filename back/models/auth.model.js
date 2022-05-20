@@ -1,28 +1,26 @@
-const db = require("../config/db.config");
-const sequelize = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
+const sequelize = new Sequelize("sqlite::memory:");
 
 module.exports = (sequelize, Sequelize) => {
-  const User = sequelize.define("User", {
-    _id: {
-      type: Sequelize.INTEGER,
+  return sequelize.define("User", {
+    id: {
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true,
     },
 
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
 
     password: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   });
-
-  module.exports = User;
 };
 
 /*
@@ -31,26 +29,25 @@ const db = require("../config/db.config");
 const sequelize = require("sequelize");
 
 module.exports = (sequelize, Sequelize) => {
-  const User = sequelize.define("User", {
-    _id: {
-      type: Sequelize.INTEGER,
+  return sequelize.define("User", {
+    id: {
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true,
     },
 
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
 
     password: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   });
-};
 */
 
 /*
@@ -59,15 +56,15 @@ const sequelize = new Sequelize('sqlite::memory:');
 
 class User extends Model {}
 User.init({
-  username: DataTypes.STRING,
-  birthday: DataTypes.DATE
+  email: DataTypes.STRING,
+  password: DataTypes.STRING
 }, { sequelize, modelName: 'user' });
 
 (async () => {
   await sequelize.sync();
   const jane = await User.create({
-    username: 'janedoe',
-    birthday: new Date(1980, 6, 20)
+    email: "janedoe",
+    password: "azerty",
   });
   console.log(jane.toJSON());
 })();

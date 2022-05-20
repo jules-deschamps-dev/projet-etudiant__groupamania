@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("../models/auth.model");
+const sequelize = require("../models/auth.model");
 require("mysql2");
 require("body-parser");
 
@@ -10,7 +10,6 @@ exports.signup = (req, res, next) => {
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
-      console.log("!");
       User.create({
         email: req.body.email,
         password: hash,
