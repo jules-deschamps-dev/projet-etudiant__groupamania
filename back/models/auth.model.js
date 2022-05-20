@@ -1,27 +1,24 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("sqlite::memory:");
+// Include Sequelize module.
+const Sequelize = require("sequelize");
+const sequelize = require("../config/db.config");
 
-module.exports = (sequelize, Sequelize) => {
-  return sequelize.define("User", {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-      primaryKey: true,
-    },
+const User = sequelize.define("users", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+  email: { type: Sequelize.STRING, allowNull: false },
+  password: { type: Sequelize.STRING, allowNull: false },
+  createdAt: Sequelize.DATE,
+  updatedAt: Sequelize.DATE,
+});
 
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  });
-};
+// Exporting User, using this constant
+// we can perform CRUD operations on
+// 'user' table.
+module.exports = User;
 
 /*
 
@@ -48,6 +45,7 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
     },
   });
+}
 */
 
 /*
