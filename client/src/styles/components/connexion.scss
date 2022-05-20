@@ -1,0 +1,47 @@
+
+
+@function center($lenght) {
+  $value: calc(50% - $lenght);
+  @return ($value);
+}
+
+
+#connexionBloc{
+  position: absolute;
+  width: clamp(400px, 80vw, 700px) ;
+  height: clamp(350px, 50vw, 400px);
+  top: clamp(center(200px), center(25vw), center(175px));
+  left: clamp(center(350px), calc(center(40vw)), center((200px)));
+  text-align: center;
+}
+
+#submitConnexionButton{
+  margin-top: $moderate-space-px;
+}
+
+
+.log-list{
+  list-style: none;
+  margin: auto;
+  display: flex;
+  li{
+    padding: $moderate-space-px;
+    border-radius: $big-space-px;
+  }
+  .active-btn{
+    background-color: rgba(orangered, .8)
+  }
+}
+
+
+form{
+  margin: auto;
+  label{
+    margin: $tiny-space-px;
+  }
+  input{
+    width: clamp(100px, 40%, 300px);
+    margin: $tiny-space-px;
+  }
+}
+

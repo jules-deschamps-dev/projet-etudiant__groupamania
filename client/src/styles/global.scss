@@ -1,0 +1,52 @@
+// VARIABLES
+$xtiny-space-px : 1px;
+$tiny-space-px : 2px;
+$small-space-px : 5px;
+$moderate-space-px : 10px;
+$large-space-px : 20px;
+$big-space-px : 50px;
+$huge-space-px: 100px;
+
+$xtiny-space-px : 1vw;
+$tiny-space-vw : 2vw;
+$small-space-vw : 5vw;
+$moderate-space-vw : 10vw;
+$large-space-vw : 20vw;
+$big-space-vw : 50vw;
+$huge-space-vw: 100vw;
+
+
+// FONTS
+@font-face {
+  font-family: "capriola";
+  src: url(../assets/fonts/Capriola-Regular.ttf)
+}
+
+// SKELETON
+html{
+  background-color: white;
+  font-family: capriola;
+  body{
+    margin: 0;
+    main{
+      min-height: 100vh;
+    }
+  }
+}
+
+
+// SIZE
+.w50{width: 50%;}
+.w40{ width: 40%; }
+.w30{ width: 30%; }
+
+// DISPLAY
+.flex{ display: flex; }
+.row{ flex-direction: row; }
+.column{ flex-direction: column; }
+.margin{ margin: auto; }
+
+// TEXTE
+h1{font-size: 2rem;}
+.txt-left{ text-align: left; }
+.txt-right{ text-align: right; }
