@@ -1,5 +1,7 @@
 import React from "react";
 import Log from "../components/Log";
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:5000";
 
 const Profil = () => {
   return (

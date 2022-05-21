@@ -1,8 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("../models/auth.model");
-require("mysql2");
-require("body-parser");
+const User = require("../models/auth.model");
 
 exports.signup = (req, res, next) => {
   console.log(req.body);
@@ -20,16 +18,6 @@ exports.signup = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-/*
-(async () => {
-  await sequelize.sync();
-  const jane = await User.create({
-    email: "janedoe",
-    password: "azerty",
-  });
-  console.log(jane.toJSON());
-})();
-*/
 exports.login = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((user) => {

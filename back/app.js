@@ -1,9 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/auth.route");
-require("dotenv").config({ path: "./config/.env" });
 const db = require("./config/db.config");
 const { Sequelize } = require("sequelize");
+require("dotenv").config({ path: "./config/.env" });
 
 const app = express();
 app.use(express.json());
