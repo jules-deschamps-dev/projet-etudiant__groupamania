@@ -4,6 +4,8 @@ import React, { useState } from "react";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -12,10 +14,12 @@ const Signup = () => {
     axios({
       method: "post",
       url: `api/user/register`,
-      withCredentials: true,
+      withCredentials: false,
       data: {
         email,
         password,
+        lastName,
+        firstName,
       },
     })
       .then((res) => {
@@ -44,8 +48,9 @@ const Signup = () => {
           <div className="flex row">
             <div className="flex column w50 txt-right">
               <label htmlFor="text"> Email </label>
-              <br />
               <label htmlFor="text"> Mot de passe </label>
+              <label htmlFor="text"> Nom </label>
+              <label htmlFor="text"> Prénom </label>
             </div>
 
             <div className="flex column w40 txt-left">
@@ -65,6 +70,22 @@ const Signup = () => {
                 id="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
+                required
+              />
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                onChange={(e) => setLastName(e.target.value)}
+                value={lastName}
+                required
+              />
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                onChange={(e) => setFirstName(e.target.value)}
+                value={firstName}
                 required
               />
               <div id="password-error"></div>
