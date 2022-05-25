@@ -51,21 +51,3 @@ exports.login = (req, res, next) => {
     })
     .catch((error) => res.status(501).json({ error }));
 };
-
-/*
-exports.signup = (req, res, next) => {
-  console.log(req.body);
-  console.log(db.user);
-  bcrypt
-    .hash(req.body.password, 10)
-    .then((hash) => {
-      db.User.create({
-        email: req.body.email,
-        password: hash,
-      })
-        .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-        .catch((error) => res.status(400).json({ error }));
-    })
-    .catch((error) => res.status(500).json({ error }));
-};
-};*/
