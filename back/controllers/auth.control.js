@@ -11,6 +11,8 @@ exports.signup = (req, res, next) => {
       User.create({
         email: req.body.email,
         password: hash,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
       })
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
         .catch((error) => res.status(400).json({ error }));
@@ -19,7 +21,16 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  User.findOne({ email: req.body.email })
+  if (!req.body.email || !req.body.password) {
+    return res
+      .status(400)
+      .json({ message: "Veuillez renseigner chaque champ" });
+  }
+  User.findOne({
+    where: {
+      email: req.body.email,
+    },
+  })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ error: "Utilisateur non trouvé !" });
@@ -31,17 +42,14 @@ exports.login = (req, res, next) => {
             return res.status(401).json({ error: "Mot de passe incorrect !" });
           }
           res.status(200).json({
-            userId: user._id,
-            token: jwt.sign({ userId: user._id }, process.env.SECRET_TOKEN, {
+            token: jwt.sign({ userId: user.id }, process.env.SECRET_TOKEN, {
               expiresIn: "24h",
             }),
           });
         })
         .catch((error) => res.status(500).json({ error }));
-      console.log(error);
     })
     .catch((error) => res.status(501).json({ error }));
-  console.log(error);
 };
 
 /*
