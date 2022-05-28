@@ -7,12 +7,13 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    document.cookie = "email =" + email;
     const emailError = document.getElementById("email-error");
     const passwordError = document.getElementById("password-error");
     axios({
       method: "post",
       url: `api/user/login`,
-      withCredentials: true,
+      withCredentials: false,
       data: {
         email,
         password,

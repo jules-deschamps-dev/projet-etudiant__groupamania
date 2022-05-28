@@ -6,7 +6,7 @@ module.exports.getAllUsers = async (req, res) => {
 };
 
 module.exports.getOneUser = async (req, res) => {
-  User.findOne({ where: { id: req.body.id } }) //recherche le champ id dans user où il est égal à la valeur de la req
+  User.findOne({ where: { id: req.body.id } })
     .then((user) => {
       userData = {
         name: user.firstName + " " + user.lastName,
@@ -22,6 +22,7 @@ module.exports.updateUser = async (req, res) => {
   await User.update(
     {
       email: req.body.email,
+      bio: req.body.bio,
     },
     { where: { id: req.body.id } }
   )

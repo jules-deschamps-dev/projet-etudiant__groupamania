@@ -4,6 +4,7 @@ const userRoutes = require("./routes/auth.route");
 const db = require("./config/db.config");
 const { Sequelize } = require("sequelize");
 const postRoutes = require("./routes/post.route");
+const likeRoute = require("./routes/like.route");
 require("dotenv").config({ path: "./config/.env" });
 
 const app = express();
@@ -28,4 +29,5 @@ db.sync();
 
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
+app.use("/api/like", likeRoute);
 module.exports = app;

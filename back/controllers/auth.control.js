@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/auth.model");
+const Cookies = require("js-cookie");
 
 exports.signup = (req, res, next) => {
   console.log(req.body);
@@ -20,12 +21,7 @@ exports.signup = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-exports.login = (req, res, next) => {
-  if (!req.body.email || !req.body.password) {
-    return res
-      .status(400)
-      .json({ message: "Veuillez renseigner chaque champ" });
-  }
+exports.login = async (req, res, next) => {
   User.findOne({
     where: {
       email: req.body.email,

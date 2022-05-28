@@ -1,12 +1,20 @@
 const Post = require("../models/post.model");
+const User = require("../models/auth.model");
+const db = require("../config/db.config");
 
 exports.newPost = (req, res) => {
-  Post.create({
-    title: req.body.title,
-    content: req.body.content,
-  })
-    .then(() => res.status(201).json({ message: "Nouveau post !" }))
-    .catch((err) => res.status(500).json({ err }));
+  User.findOne({
+    attributes: ["id", "firstName", "lastName"],
+    where: { id: req.body.author },
+  }).then((user) => {
+    Post.create({
+      title: req.body.title,
+      content: req.body.content,
+      author: user.id,
+    })
+      .then(() => res.status(201).json({ message: "Nouvelle publication !" }))
+      .catch((err) => res.status(500).json({ err }));
+  });
 };
 
 module.exports.getAllPosts = async (req, res) => {
@@ -15,16 +23,21 @@ module.exports.getAllPosts = async (req, res) => {
 };
 
 module.exports.getOnePost = async (req, res) => {
-  Post.findOne({ where: { id: req.body.id } }) //recherche le champ id dans post où il est égal à la valeur de la req
-    .then((post) => {
-      postData = {
-        name: post.firstName + " " + post.lastName,
-        email: post.email,
-        id: post.id,
-      };
-      res.status(201).json(postData);
-    })
-    .catch((error) => res.status(500).json({ error }));
+  User.findOne({
+    attributes: ["id", "firstName", "lastName"],
+    where: { id: req.body.id },
+  }).then((user) => {
+    Post.findOne({ where: { id: req.body.id } })
+      .then((post) => {
+        postData = {
+          id: post.id,
+          title: post.title,
+          auteur: user.firstName,
+        };
+        res.status(201).json(postData);
+      })
+      .catch((error) => res.status(500).json({ error }));
+  });
 };
 
 module.exports.updatePost = async (req, res) => {
@@ -42,6 +55,6 @@ module.exports.deletePost = async (req, res) => {
   await Post.destroy({
     where: { id: req.body.id },
   })
-    .then(res.status(200).json(" Utilisateur supprimé ! "))
+    .then(res.status(200).json(" Publication supprimé ! "))
     .catch((err) => res.status(500).json({ err }));
 };
