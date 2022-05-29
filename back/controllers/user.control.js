@@ -6,7 +6,12 @@ module.exports.getAllUsers = async (req, res) => {
 };
 
 module.exports.getOneUser = async (req, res) => {
-  User.findOne({ where: { id: req.body.id } })
+  console.log(req.params);
+  User.findOne({
+    where: {
+      id: req.params.id,
+    },
+  })
     .then((user) => {
       userData = {
         name: user.firstName + " " + user.lastName,
@@ -15,7 +20,12 @@ module.exports.getOneUser = async (req, res) => {
       };
       res.status(201).json(userData);
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch((error) =>
+      res.status(500).json({
+        error,
+        message: "Erreur dans la récupération des données utilisateur",
+      })
+    );
 };
 
 module.exports.updateUser = async (req, res) => {
@@ -24,7 +34,7 @@ module.exports.updateUser = async (req, res) => {
       email: req.body.email,
       bio: req.body.bio,
     },
-    { where: { id: req.body.id } }
+    { where: { id: req.params.id } }
   )
     .then(res.status(201).json(" Profil mis à jour avec succès "))
     .catch((error) => res.status(500).json({ error }));

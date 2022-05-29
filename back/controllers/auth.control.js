@@ -1,8 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/auth.model");
-const Cookies = require("js-cookie");
-
+const { signupError } = require("../utils/errors.utils");
 exports.signup = (req, res, next) => {
   console.log(req.body);
 
@@ -16,7 +15,10 @@ exports.signup = (req, res, next) => {
         lastName: req.body.lastName,
       })
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-        .catch((error) => res.status(400).json({ error }));
+        .catch((err) => {
+          const error = signupError(err);
+          res.status(400).json({ error });
+        });
     })
     .catch((error) => res.status(500).json({ error }));
 };
@@ -37,13 +39,27 @@ exports.login = async (req, res, next) => {
           if (!valid) {
             return res.status(401).json({ error: "Mot de passe incorrect !" });
           }
-          res.status(200).json({
-            token: jwt.sign({ userId: user.id }, process.env.SECRET_TOKEN, {
-              expiresIn: "24h",
-            }),
+          const token = createToken(user.id);
+          res.cookie("token", token, {
+            httpOnly: true,
+            maxAge: 1000 * 3600 * 24,
           });
+          console.log(user.id);
+          res.status(200).json({ token });
         })
         .catch((error) => res.status(500).json({ error }));
     })
     .catch((error) => res.status(501).json({ error }));
+};
+
+module.exports.logout = (req, res) => {
+  res.cookie("token", "", { maxAge: 1 });
+  res.status(200).json({ message: "Disconnected " });
+};
+
+const maxAge = "9999999999999";
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.SECRET_TOKEN, {
+    expiresIn: maxAge,
+  });
 };

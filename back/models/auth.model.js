@@ -1,7 +1,7 @@
 // Include Sequelize module.
 const Sequelize = require("sequelize");
 const db = require("../config/db.config");
-const { isEmail } = require("validator");
+const { isEmail, len } = require("validator");
 
 const User = db.define("users", {
   id: {
@@ -12,11 +12,19 @@ const User = db.define("users", {
   },
   email: {
     type: Sequelize.STRING,
-    //validate: { isEmail },
     allowNull: false,
     unique: true,
+    validate: {
+      isEmail: true,
+    },
   },
-  password: { type: Sequelize.STRING, allowNull: false },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      min: 6,
+    },
+  },
   firstName: { type: Sequelize.STRING, allowNull: false },
   lastName: { type: Sequelize.STRING, allowNull: false },
   avatar: { type: Sequelize.STRING, defaultValue: `/images/user.svg` },
