@@ -14,7 +14,7 @@ const Signup = () => {
     axios({
       method: "post",
       url: `api/user/register`,
-      withCredentials: false,
+      withCredentials: true,
       data: {
         email,
         password,

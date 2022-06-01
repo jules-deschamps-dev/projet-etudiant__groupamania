@@ -14,7 +14,7 @@ const Post = () => {
     axios({
       method: "post",
       url: `api/post/create`,
-      withCredentials: false,
+      withCredentials: true,
       data: {
         title,
         content,

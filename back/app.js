@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
+
 const userRoutes = require("./routes/auth.route");
 const db = require("./config/db.config");
 const { Sequelize } = require("sequelize");
@@ -17,6 +19,7 @@ app.use(cookieParser());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
@@ -27,9 +30,24 @@ app.use((req, res, next) => {
   );
   next();
 });
-
+app.use(
+  cors({
+    origin: [
+      `http://localhost:3000`,
+      `http://localhost:5000`,
+      `http://localhost:3306`,
+    ],
+    credentials: "true",
+  })
+);
 app.get("*", checkUser);
+/*
+app.get("*", checkUser, (req, res) => {
+  res.status(200).json(res.locals.user);
+});
+*/
 app.get("/token", requireAuth, (req, res) => {
+  //res.status(200).json(res.locals.user);
   res.status(200).json(res.locals.user);
 });
 

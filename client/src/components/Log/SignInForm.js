@@ -9,32 +9,11 @@ const Login = () => {
     e.preventDefault();
     const emailError = document.getElementById("email-error");
     const passwordError = document.getElementById("password-error");
-    /*
-    await axios({
-      method: "get",
-      url: `api/user/:id`,
-      withCredentials: false,
-      data: {
-        email: email,
-      },
-    })
-      .then((res) => {
-        console.log("Et ici tu y arrives ?");
-        if (res.data.errors) {
-          console.log("!");
-        } else {
-          console.log("ok");
-          //document.cookie = "firstName =" + res.firstName;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-*/
+
     await axios({
       method: "post",
       url: `api/user/login`,
-      withCredentials: false,
+      withCredentials: true,
       data: {
         email,
         password,
@@ -45,9 +24,10 @@ const Login = () => {
           emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
         } else {
-          //window.location = "/";
-          document.cookie = "email =" + email;
-          console.log("Tu arrives jusque ici pourtant");
+          window.location = "/";
+          console.log(res);
+          //localStorage.setItem("token", res.data.token);
+          document.cookie = "token=" + res.data.token;
         }
       })
       .catch((err) => {

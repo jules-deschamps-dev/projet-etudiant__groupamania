@@ -15,6 +15,9 @@ module.exports.getOneUser = async (req, res) => {
     .then((user) => {
       userData = {
         name: user.firstName + " " + user.lastName,
+        firstName: user.firstName,
+        lastName: user.firstName,
+        picture: user.picture,
         email: user.email,
         id: user.id,
       };
@@ -28,7 +31,7 @@ module.exports.getOneUser = async (req, res) => {
     );
 };
 
-module.exports.updateUser = async (req, res) => {
+module.exports.update = async (req, res) => {
   await User.update(
     {
       email: req.body.email,

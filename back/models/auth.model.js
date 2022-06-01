@@ -27,7 +27,10 @@ const User = db.define("users", {
   },
   firstName: { type: Sequelize.STRING, allowNull: false },
   lastName: { type: Sequelize.STRING, allowNull: false },
-  avatar: { type: Sequelize.STRING, defaultValue: `/images/user.svg` },
+  picture: {
+    type: Sequelize.STRING,
+    defaultValue: `images/user.png`,
+  },
   bio: { type: Sequelize.TEXT, defaultValue: "" },
   createdAt: Sequelize.DATE,
   updatedAt: Sequelize.DATE,

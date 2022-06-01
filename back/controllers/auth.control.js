@@ -44,7 +44,6 @@ exports.login = async (req, res, next) => {
             httpOnly: true,
             maxAge: 1000 * 3600 * 24,
           });
-          console.log(user.id);
           res.status(200).json({ token });
         })
         .catch((error) => res.status(500).json({ error }));
