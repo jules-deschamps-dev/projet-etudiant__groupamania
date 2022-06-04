@@ -16,29 +16,25 @@ const Log = (props) => {
   };
 
   return (
-    <div>
-      <div className="connection-form">
-        <div className="form-container">
-          <ul className="log-list">
-            <li
-              onClick={handleModals}
-              id="register"
-              className={signUpModal ? "active-btn" : "log-list-element"}
-            >
-              S'inscrire
-            </li>
-            <li
-              onClick={handleModals}
-              id="login"
-              className={signInModal ? "active-btn" : "log-list-element"}
-            >
-              Se connecter
-            </li>
-          </ul>
-          {signUpModal && <SignUpForm />}
-          {signInModal && <SignInForm />}
-        </div>
-      </div>
+    <div className="log-container flex column">
+      <ul className="log-list flex row">
+        <li
+          onClick={handleModals}
+          id="register"
+          className={signUpModal ? "active-btn" : "log-list-element"}
+        >
+          S'inscrire
+        </li>
+        <li
+          onClick={handleModals}
+          id="login"
+          className={signInModal ? "active-btn" : "log-list-element"}
+        >
+          Se connecter
+        </li>
+      </ul>
+      {signUpModal && <SignUpForm />}
+      {signInModal && <SignInForm />}
     </div>
   );
 };

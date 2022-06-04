@@ -1,0 +1,17 @@
+.nav-bar{
+  width: auto;
+  height: clamp(50px, 4vh, 100px);
+  padding: 10px;
+  background-color: rgba($color: #4E5166, $alpha: 1.0);
+  .icon{
+    height: 100%;
+  }
+  .subnav-icon{
+    margin-left: $small-space-px;
+    margin-right: $small-space-px;
+  }
+  .logout-container{
+    margin-left: auto;
+    margin-right: 10px;
+  }
+}

@@ -3,8 +3,8 @@ import axios from "axios";
 export const GET_USERS = "GET_USERS";
 
 export const getUsers = () => {
-  return async (dispatch) => {
-    return await axios
+  return (dispatch) => {
+    return axios
       .get(`${process.env.REACT_APP_API_URL}api/user/`, {
         withCredentials: true,
       })

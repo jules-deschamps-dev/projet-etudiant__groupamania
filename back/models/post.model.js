@@ -8,7 +8,6 @@ const Post = db.define("posts", {
     primaryKey: true,
     allowNull: false,
   },
-  title: { type: Sequilize.STRING, allowNull: false },
   content: { type: Sequilize.TEXT, allowNull: false },
   author: { type: Sequilize.INTEGER, defaultValue: 0 },
   createdAt: Sequilize.DATE,

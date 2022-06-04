@@ -31,7 +31,6 @@ module.exports.getOnePost = async (req, res) => {
       .then((post) => {
         postData = {
           id: post.id,
-          title: post.title,
           auteur: user.firstName,
         };
         res.status(201).json(postData);
@@ -40,21 +39,29 @@ module.exports.getOnePost = async (req, res) => {
   });
 };
 
-module.exports.updatePost = async (req, res) => {
-  await Post.update(
+module.exports.updatePost = (req, res) => {
+  Post.update(
     {
       content: req.body.content,
     },
-    { where: { id: req.body.id } }
+    {
+      where: { id: req.params.id },
+    }
   )
     .then(res.status(201).json(" Publication mise à jour "))
     .catch((error) => res.status(500).json({ error }));
 };
 
-module.exports.deletePost = async (req, res) => {
-  await Post.destroy({
-    where: { id: req.body.id },
+module.exports.deletePost = (req, res) => {
+  /*Comment.destroy({
+    where: { node: req.body.id },
   })
+    .then(() => {*/
+  Post.destroy({
+    where: { id: req.params.id },
+  })
+    /*})*/
+
     .then(res.status(200).json(" Publication supprimé ! "))
     .catch((err) => res.status(500).json({ err }));
 };

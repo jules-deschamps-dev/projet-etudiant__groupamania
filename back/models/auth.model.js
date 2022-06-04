@@ -29,7 +29,7 @@ const User = db.define("users", {
   lastName: { type: Sequelize.STRING, allowNull: false },
   picture: {
     type: Sequelize.STRING,
-    defaultValue: `images/user.png`,
+    defaultValue: "./uploads/profil/user.png",
   },
   bio: { type: Sequelize.TEXT, defaultValue: "" },
   createdAt: Sequelize.DATE,

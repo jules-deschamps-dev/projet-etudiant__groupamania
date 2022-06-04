@@ -1,0 +1,65 @@
+.card-container{
+  width: clamp(200px, 60vw, 1220px);
+  border: 2px solid #4E5166;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  background-color: white;
+  padding: $small-space-px;
+  border: solid 2px #4E5166;
+  .icon{
+    width: 50px;
+    height: 50px;
+  }
+  .info-container{
+    width: 20%;
+    .author{
+      width: 100%;
+      font-size: .8em;
+      font-style: italic;
+    }
+    .picture-container{
+      width: 60%;
+      margin: auto;
+    }
+  }
+  .content-container{
+    width: calc(100% - 60px - $large-space-px * 2);
+    z-index: 0;
+    .content{
+      font-style: italic;
+    }
+  }
+  .info-post-container{
+    width: 20%;
+    text-align: right;
+  }
+}
+.new-post-container{
+  width: 50%;
+  min-height: 200px;
+  .content{
+    width: 100%;
+  }
+  .import-picture-container{
+    width: 50px;
+    height: 50px;
+  }
+  .icon{
+    width: 50px;
+    height: 50px;
+  }
+}
+  .import-btn{
+    width: 50px;
+    height: 50px;
+  }
+  .user-info{
+    height: 50px;
+    width: 50px;
+  }
+  .icon-picture{
+    width: 50px;
+  }
+  .btn-send{
+    margin-left: 60px;
+  }

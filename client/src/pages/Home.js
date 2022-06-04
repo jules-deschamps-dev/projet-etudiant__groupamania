@@ -1,17 +1,21 @@
 import React, { useContext } from "react";
 import Log from "../components/Log";
 import { UidContext } from "../components/AppContext";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import Thread from "../components/Thread";
+import Nav from "../components/Nav";
+import NewPost from "../components/Post/NewPost";
 
 const Home = () => {
   const uid = useContext(UidContext);
-  const userData = useSelector((state) => state.userReducer);
 
   return (
     <main className="home-page">
       {uid ? (
-        <Thread />
+        <>
+          <NewPost />
+          <Thread />
+        </>
       ) : (
         <div className="log-container">
           <Log signin={true} signup={false} />

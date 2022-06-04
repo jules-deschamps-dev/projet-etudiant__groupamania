@@ -7,7 +7,7 @@ $large-space-px : 20px;
 $big-space-px : 50px;
 $huge-space-px: 100px;
 
-$xtiny-space-px : 1vw;
+$xtiny-space-vw : 1vw;
 $tiny-space-vw : 2vw;
 $small-space-vw : 5vw;
 $moderate-space-vw : 10vw;
@@ -15,7 +15,11 @@ $large-space-vw : 20vw;
 $big-space-vw : 50vw;
 $huge-space-vw: 100vw;
 
-
+// FUNCTIONS
+@function center($lenght) {
+  $value: calc(50% - $lenght);
+  @return ($value);
+}
 // FONTS
 @font-face {
   font-family: "capriola";
@@ -26,16 +30,22 @@ $huge-space-vw: 100vw;
 html{
   background-color: white;
   font-family: capriola;
+  margin: 0;
+  padding: 0;
   body{
     margin: 0;
+    padding: 0;
     main{
       min-height: 100vh;
+      margin-left: 12vw;
     }
   }
 }
 
 
 // SIZE
+.limit-height{ height: 100%;}
+.limit-width{ width: 100%;}
 .w50{width: 50%;}
 .w40{ width: 40%; }
 .w30{ width: 30%; }
@@ -45,8 +55,15 @@ html{
 .row{ flex-direction: row; }
 .column{ flex-direction: column; }
 .margin{ margin: auto; }
+.absolute{position: absolute;}
+.margin-left-auto{margin-left : auto;}
 
 // TEXTE
 h1{font-size: 2rem;}
 .txt-left{ text-align: left; }
 .txt-right{ text-align: right; }
+
+// REFORM
+ul{ padding: 0; }
+li{ list-style: none; }
+input[type=file]{opacity: 0;}

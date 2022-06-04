@@ -36,53 +36,51 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <div id="connexionBloc">
-        <h1> Connexion </h1>
-        <form
-          action=""
-          onSubmit={handleLogin}
-          id="login-form"
-          className="flex column"
-        >
-          <div className="flex row">
-            <div className="flex column w50 txt-right">
-              <label htmlFor="text"> Email </label>
-              <br />
-              <label htmlFor="text"> Mot de passe </label>
-            </div>
-
-            <div className="flex column w40 txt-left">
-              <input
-                type="text"
-                name="email"
-                id="email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                required
-              />
-              <div id="email-error"></div>
-              <br />
-              <input
-                type="password"
-                name="password"
-                id="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                required
-              />
-              <div id="password-error"></div>
-            </div>
+    <div id="connexionBloc">
+      <h1> Connexion </h1>
+      <form
+        action=""
+        onSubmit={handleLogin}
+        id="login-form"
+        className="flex column"
+      >
+        <div className="flex row">
+          <div className="flex column w50 txt-right">
+            <label htmlFor="text"> Email </label>
+            <br />
+            <label htmlFor="text"> Mot de passe </label>
           </div>
-          <input
-            type="submit"
-            value="Connexion"
-            //onClick={connect()}
-            id="submitConnexionButton"
-            className="margin w30"
-          />
-        </form>
-      </div>
+
+          <div className="flex column w40 txt-left">
+            <input
+              type="text"
+              name="email"
+              id="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              required
+            />
+            <div id="email-error"></div>
+            <br />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
+            />
+            <div id="password-error"></div>
+          </div>
+        </div>
+        <input
+          type="submit"
+          value="Connexion"
+          //onClick={connect()}
+          id="submitConnexionButton"
+          className="margin w30"
+        />
+      </form>
     </div>
   );
 };

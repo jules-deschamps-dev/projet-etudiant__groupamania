@@ -1,7 +1,10 @@
 const User = require("../models/auth.model");
 
 module.exports.getAllUsers = async (req, res) => {
-  const users = await User.findAll();
+  console.log("update");
+  const users = await User.findAll({
+    attributes: ["id", "firstName", "lastName", "email", "bio", "picture"],
+  });
   res.status(200).json(users);
 };
 
@@ -32,6 +35,14 @@ module.exports.getOneUser = async (req, res) => {
 };
 
 module.exports.update = async (req, res) => {
+  const picture = "";
+  if (req.file) {
+    console.log("req file !");
+    picture = `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`;
+  }
+
   await User.update(
     {
       email: req.body.email,
