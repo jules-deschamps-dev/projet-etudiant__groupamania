@@ -4,6 +4,7 @@ import { UidContext } from "../components/AppContext";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import UpdateProfil from "../components/Profil/UpdateProfil";
+import Nav from "../components/Nav";
 axios.defaults.baseURL = "http://localhost:5000";
 
 const Profil = () => {
@@ -13,7 +14,10 @@ const Profil = () => {
   return (
     <main className="profil-page">
       {uid ? (
-        <UpdateProfil />
+        <>
+          <Nav />
+          <UpdateProfil />
+        </>
       ) : (
         <div className="log-container">
           <Log signin={true} signup={false} />

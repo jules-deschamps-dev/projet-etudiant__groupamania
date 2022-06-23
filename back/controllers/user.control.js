@@ -1,7 +1,7 @@
 const User = require("../models/auth.model");
+const fs = require("fs");
 
 module.exports.getAllUsers = async (req, res) => {
-  console.log("update");
   const users = await User.findAll({
     attributes: ["id", "firstName", "lastName", "email", "bio", "picture"],
   });
@@ -19,9 +19,10 @@ module.exports.getOneUser = async (req, res) => {
       userData = {
         name: user.firstName + " " + user.lastName,
         firstName: user.firstName,
-        lastName: user.firstName,
+        lastName: user.lastName,
         picture: user.picture,
         email: user.email,
+        bio: user.bio,
         id: user.id,
       };
       res.status(201).json(userData);
@@ -35,9 +36,10 @@ module.exports.getOneUser = async (req, res) => {
 };
 
 module.exports.update = async (req, res) => {
-  const picture = "";
+  console.log("update !!!!!!");
+  let picture = "";
   if (req.file) {
-    console.log("req file !");
+    console.log("req file !", req.file);
     picture = `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`;
@@ -47,6 +49,8 @@ module.exports.update = async (req, res) => {
     {
       email: req.body.email,
       bio: req.body.bio,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
     },
     { where: { id: req.params.id } }
   )

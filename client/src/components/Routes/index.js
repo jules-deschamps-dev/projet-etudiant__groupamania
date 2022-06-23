@@ -13,10 +13,9 @@ const index = () => {
   return (
     <div>
       <Router>
-        <Nav />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/profil" exact component={Profil} />
+          <Route path="/profil" component={(props) => <Profil {...props} />} />
           <Redirect to="/" />
         </Switch>
       </Router>

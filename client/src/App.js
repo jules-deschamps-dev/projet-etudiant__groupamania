@@ -6,8 +6,9 @@ import { getUser } from "./actions/user.actions";
 import Routes from "./components/Routes";
 
 const App = () => {
-  const [uid, setUid] = useState(null);
+  const [uid, setUid] = useState(null); // where uid is UserID
   const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchToken = () => {
       axios({
@@ -21,6 +22,7 @@ const App = () => {
         })
         .catch((err) => console.log("No token", err));
     };
+
     fetchToken();
     if (uid) dispatch(getUser(uid));
   });

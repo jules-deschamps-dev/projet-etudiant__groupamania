@@ -10,13 +10,15 @@ const Thread = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.postReducer);
 
-  useEffect(() => {
-    if (loadPost) {
-      dispatch(getPosts());
-      dispatch(getAllLikes()); // c'est ici que c'est important
-      setLoadPost(false); //on a récupéré les posts on a plus besoin de le faire
-    }
-  }, [loadPost, dispatch]);
+  useEffect(
+    () => {
+      if (loadPost) {
+        dispatch(getPosts());
+        dispatch(getAllLikes()); // c'est ici que c'est important
+        setLoadPost(false); //on a récupéré les posts on a plus besoin de le faire
+      }
+    } /*, [loadPost, dispatch]*/
+  );
 
   return (
     <div className="thread-container">

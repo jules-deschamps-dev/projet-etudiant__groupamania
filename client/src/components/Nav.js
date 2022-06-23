@@ -35,7 +35,7 @@ const Nav = () => {
         </div>
       </div>
       <div className="icon logout-container">
-        <NavLink exact to="/profil">
+        <NavLink exact to="/">
           <Logout />
         </NavLink>
       </div>

@@ -5,9 +5,9 @@ const userCtrl = require("../controllers/user.control");
 const checkUser = require("../middlewares/auth.middleware");
 const uploadController = require("../controllers/upload.controller");
 
-const multer = require("../middlewares/multer.config");
-//const multer = require("multer");
-//const upload = multer();
+//const multer = require("../middlewares/multer.config");
+const multer = require("multer");
+const upload = multer();
 //const password = require("../middleware/password");
 
 // AUTHENTIFICATION
@@ -20,6 +20,6 @@ router.get("/", userCtrl.getAllUsers); // READ
 router.get("/:id", checkUser.requireAuth, userCtrl.getOneUser);
 router.put("/:id", multer, userCtrl.update); // UPDATE
 router.delete("/:id", userCtrl.deleteUser); // DELETE
-//router.post("/upload", upload.single("file"), uploadController.uploadProfil);
+router.post("/upload", upload.single("file"), uploadController.uploadProfil);
 
 module.exports = router;

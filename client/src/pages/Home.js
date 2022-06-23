@@ -1,27 +1,29 @@
 import React, { useContext } from "react";
 import Log from "../components/Log";
 import { UidContext } from "../components/AppContext";
-//import { useSelector } from "react-redux";
 import Thread from "../components/Thread";
-import Nav from "../components/Nav";
 import NewPost from "../components/Post/NewPost";
+import Nav from "../components/Nav";
 
 const Home = () => {
   const uid = useContext(UidContext);
 
   return (
-    <main className="home-page">
+    <>
       {uid ? (
         <>
-          <NewPost />
-          <Thread />
+          <Nav />
+          <div className="home-page">
+            <NewPost />
+            <Thread />
+          </div>
         </>
       ) : (
-        <div className="log-container">
+        <div>
           <Log signin={true} signup={false} />
         </div>
       )}
-    </main>
+    </>
   );
 };
 

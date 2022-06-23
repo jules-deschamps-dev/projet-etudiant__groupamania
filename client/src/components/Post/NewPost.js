@@ -43,7 +43,7 @@ const NewPost = () => {
   };
 
   return (
-    <div className="new-post-container">
+    <div className="">
       <NavLink exact to="/profil">
         <div className="flex row margin user-info">
           <img
@@ -68,21 +68,25 @@ const NewPost = () => {
 
         {message || postPicture ? (
           <div className="card-container flex row margin">
-            <div className="picture-container">
-              <img
-                src={userData.picture}
-                alt="Avatar utilisateur"
-                className="icon-picture"
-              />
+            <div className="info-container">
+              <div className="picture-container">
+                <img
+                  src={userData.picture}
+                  alt="Avatar utilisateur"
+                  className="icon-picture"
+                />
+              </div>
             </div>
 
-            <div className="flex column container">
+            <div className="flex column info-container">
               <h3 className="author">{userData.name}</h3>
-              <div className="content">
-                <p>{message}</p>
+              <div className="content-container">
+                <p className="content">{message}</p>
                 <img src={postPicture} alt="" />
               </div>
-              <span className="date">{timestampParser(Date.now())}</span>
+              <span className="info-post-containe">
+                {timestampParser(Date.now())}
+              </span>
             </div>
           </div>
         ) : null}

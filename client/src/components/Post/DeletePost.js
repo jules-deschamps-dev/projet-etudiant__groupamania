@@ -17,7 +17,7 @@ const DeleteCard = (props) => {
       <img
         src="./img/icons/circle-trash.svg"
         alt="Delete post"
-        className="edit-btn icon"
+        className="edit-btn icon-set-post"
       />
     </div>
   );

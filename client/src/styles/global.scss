@@ -15,6 +15,10 @@ $large-space-vw : 20vw;
 $big-space-vw : 50vw;
 $huge-space-vw: 100vw;
 
+$primary-color : #FD2D01;
+$secondary-color : #FFD7D7;
+$tertiary-color : #4E5166;
+
 // FUNCTIONS
 @function center($lenght) {
   $value: calc(50% - $lenght);
@@ -29,6 +33,11 @@ $huge-space-vw: 100vw;
 // SKELETON
 html{
   background-color: white;
+  background: url("../assets/background/office.webp");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position-y: top;
   font-family: capriola;
   margin: 0;
   padding: 0;
@@ -37,7 +46,6 @@ html{
     padding: 0;
     main{
       min-height: 100vh;
-      margin-left: 12vw;
     }
   }
 }
@@ -54,6 +62,7 @@ html{
 .flex{ display: flex; }
 .row{ flex-direction: row; }
 .column{ flex-direction: column; }
+.inline-flex{ display: inline-flex;}
 .margin{ margin: auto; }
 .absolute{position: absolute;}
 .margin-left-auto{margin-left : auto;}

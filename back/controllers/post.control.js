@@ -3,18 +3,16 @@ const User = require("../models/auth.model");
 const db = require("../config/db.config");
 
 exports.newPost = (req, res) => {
-  User.findOne({
-    attributes: ["id", "firstName", "lastName"],
-    where: { id: req.body.author },
-  }).then((user) => {
-    Post.create({
-      title: req.body.title,
-      content: req.body.content,
-      author: user.id,
-    })
-      .then(() => res.status(201).json({ message: "Nouvelle publication !" }))
-      .catch((err) => res.status(500).json({ err }));
-  });
+  if (req.file) {
+    console.log(req.file);
+  }
+  Post.create({
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author,
+  })
+    .then(() => res.status(201).json({ message: "Nouvelle publication !" }))
+    .catch((err) => res.status(500).json({ err }));
 };
 
 module.exports.getAllPosts = async (req, res) => {
@@ -27,7 +25,7 @@ module.exports.getOnePost = async (req, res) => {
     attributes: ["id", "firstName", "lastName"],
     where: { id: req.body.id },
   }).then((user) => {
-    Post.findOne({ where: { id: req.body.id } })
+    Post.findOne({ where: { id: req.params.id } })
       .then((post) => {
         postData = {
           id: post.id,

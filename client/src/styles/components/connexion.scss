@@ -13,16 +13,17 @@
 }
 
 .log-container{
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   display: flex;
-  width: 100%;
   position: absolute;
-  width: clamp(400px, 80vw, 700px) ;
-  height: clamp(350px, 50vw, 400px);
-  top: clamp(center(200px), center(25vw), center(175px));
-  left: clamp(center(350px), calc(center(40vw)), center((200px)));
+  width: clamp(400px, 25vw, 700px) ;
+  height: clamp(350px, 20vw, 400px);
+  top: clamp(center(200px), center(12.5vw), center(175px));
+  left: clamp(center(350px), calc(center(10vw)), center((200px)));
   text-align: center;
+  border-radius: 50px;
+  background-color: rgba($color: #FFFFFF, $alpha: .9);
+
 }
 .log-list{
   list-style: none;
@@ -37,7 +38,7 @@
   }
   .active-btn{
     color: white;
-    background-color: #FD2D01
+    background-color: $primary-color
   }
 }
 

@@ -18,7 +18,6 @@ exports.newLike = async (req, res) => {
     .then(() => {
       Like.create({
         post: postData.id,
-        value: req.body.value,
         user: req.body.user,
       });
     })
@@ -35,6 +34,14 @@ module.exports.getAllLikes = async (req, res) => {
 
 module.exports.getLikesByPost = async (req, res) => {
   Like.findAll({
-    where: { post: req.params.postId },
-  }).then((like) => res.status(200).json(like));
+    where: { post: req.params.post },
+  }).then((likes) => res.status(200).json(likes));
+};
+
+module.exports.unlike = (req, res) => {
+  Like.destroy({
+    where: { id: req.params.unlike },
+  })
+    .then(res.status(200).json(" Post was unliked succesfully ! "))
+    .catch((err) => console.log(err));
 };

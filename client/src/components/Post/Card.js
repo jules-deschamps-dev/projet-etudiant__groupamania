@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatePost } from "../../actions/post.actions";
 import { isEmpty, dateParser } from "../Utils";
 import DeleteCard from "./DeletePost";
-import LikeButton from "./LikeButton";
+import Likes from "./Likes";
+import UserInformation from "./UserInformation";
 
 const Card = ({ post, like }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +12,6 @@ const Card = ({ post, like }) => {
   const [textUpdate, setTextUpdate] = useState(null);
   const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
-  const likesData = useSelector((state) => state.likeReducer);
   const dispatch = useDispatch();
 
   const updateItem = () => {
@@ -28,35 +28,10 @@ const Card = ({ post, like }) => {
   return (
     <li className="card-container flex row" key={post.id}>
       {isLoading ? (
-        <p>Chargement</p>
+        <p>Charging..</p>
       ) : (
         <>
-          <div className="info-container">
-            <div className="picture-container">
-              <img
-                src={
-                  !isEmpty(usersData[0]) &&
-                  usersData
-                    .map((user) => {
-                      if (user.id === post.author) return user.picture;
-                      else return null;
-                    })
-                    .join("") //replace "," by ""
-                }
-                alt="Avatar utilisateur"
-                className="limit-width "
-              />
-
-              <span className="author flex">
-                {!isEmpty(usersData[0]) &&
-                  usersData.map((user) => {
-                    if (user.id === post.author)
-                      return user.firstName + " " + user.lastName;
-                    else return null;
-                  })}
-              </span>
-            </div>
-          </div>
+          <UserInformation author={post.author} />
 
           <div className="flex column content-container">
             {isUpdating === false && <p className="content">{post.content}</p>}
@@ -86,7 +61,7 @@ const Card = ({ post, like }) => {
                   <img
                     src="./img/icons/message-pen.svg"
                     alt="Edit post"
-                    className="edit-btn icon"
+                    className="edit-btn icon-set-post"
                   />
                 </div>
                 <div>
@@ -96,12 +71,7 @@ const Card = ({ post, like }) => {
             )}
 
             <div>
-              {likesData
-                .map((liker) => {
-                  if (liker.post === post.id) return <LikeButton />;
-                  else return "like";
-                })
-                .join("")}
+              <Likes post={post.id} />
             </div>
           </div>
         </>
