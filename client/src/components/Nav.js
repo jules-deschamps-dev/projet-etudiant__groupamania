@@ -1,6 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logout from "./Log/Logout";
+import { reload } from "./Utils";
 
 const Nav = () => {
   return (
@@ -11,6 +12,7 @@ const Nav = () => {
             src="./img/icons/icon-left-font-monochrome-white.svg"
             alt="home-page"
             className="icon"
+            onClick={() => reload("/")}
           />
         </NavLink>
       </div>
@@ -21,6 +23,7 @@ const Nav = () => {
               src="./img/icons/house-white.png"
               alt="home-page"
               className="icon"
+              onClick={() => reload("/")}
             />
           </NavLink>
         </div>
@@ -30,6 +33,7 @@ const Nav = () => {
               src="./img/icons/user-white.png"
               alt="home-page"
               className="icon"
+              onClick={() => reload("/profil")}
             />
           </NavLink>
         </div>

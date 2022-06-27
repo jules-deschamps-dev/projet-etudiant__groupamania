@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_USER = "GET_USER";
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
+export const UPDATE_PROFIL = "UPDATE_PROFIL";
 
 export const getUser = (uid) => {
   return async (dispatch) => {
@@ -15,6 +16,35 @@ export const getUser = (uid) => {
       .catch((err) => console.log("erreur ", err));
   };
 };
+
+export const updateProfil = (data, uid) => {
+  return async (dispatch) => {
+    return axios({
+      method: "put",
+      url: `${process.env.REACT_APP_API_URL}api/user/${uid}`,
+      data: { data },
+    })
+      .then((res) => {
+        dispatch({ type: UPDATE_PROFIL, payload: res.data });
+      })
+      .catch((err) => console.log("erreur ", err));
+  };
+};
+
+/*
+export const updateProfil = (data, uid) => {
+  return async (dispatch) => {
+    return await axios
+      .put(`${process.env.REACT_APP_API_URL}api/user/${uid}`, data, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        dispatch({ type: UPDATE_PROFIL, payload: res.data });
+      })
+      .catch((err) => console.log("erreur ", err));
+  };
+};
+*/
 
 export const uploadPicture = (data, id) => {
   return async (dispatch) => {

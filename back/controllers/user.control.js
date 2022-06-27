@@ -36,16 +36,9 @@ module.exports.getOneUser = async (req, res) => {
 };
 
 module.exports.update = async (req, res) => {
-  console.log("update !!!!!!");
-  let picture = "";
-  if (req.file) {
-    console.log("req file !", req.file);
-    picture = `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`;
-  }
-
-  await User.update(
+  console.log("UPDATE !!!!");
+  console.log(req.body);
+  User.update(
     {
       email: req.body.email,
       bio: req.body.bio,

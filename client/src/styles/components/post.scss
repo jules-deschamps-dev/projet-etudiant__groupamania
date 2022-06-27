@@ -27,16 +27,24 @@
     }
 } 
 
-  .info-container{
-    width: 20%;
+  .info-container{width: 20%;
+    margin: auto;
+    .picture{
+      width: 75px;
+      height: 75px;
+      margin: auto;
+      border-radius: 20px;
+      overflow: hidden;
+      object-fit: cover;
+    }
     .author{
       width: 100%;
       font-size: .8em;
-      font-style: italic;
     }
-    .picture-container{
-      width: 60%;
-      margin: auto;
+    .bio{
+      width: 100%;
+      font-size: .7em;
+      font-style: italic;
     }
   }
   .content-container{

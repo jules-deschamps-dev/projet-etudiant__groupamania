@@ -39,3 +39,7 @@ export const timestampParser = (num) => {
 
   return date.toString();
 };
+
+export const reload = (target) => {
+  document.location.href = target;
+};

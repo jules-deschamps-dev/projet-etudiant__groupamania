@@ -5,7 +5,6 @@ const { json } = require("body-parser");
 const pipeline = promisify(require("stream").pipeline);
 
 module.exports.uploadProfil = async (req, res) => {
-  console.log("uploading !!!!!!!!!!!!!!!!!!!!!!");
   try {
     if (req.file.size > 9200000) throw Error("max size");
     if (

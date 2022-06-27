@@ -2,8 +2,9 @@ import React, { useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UploadImg from "./UploadImg";
 import { UidContext } from "../AppContext";
+
 import axios from "axios";
-import { getUsers } from "../../actions/users.actions";
+import { getUser, updateProfil } from "../../actions/user.actions";
 
 const UpdateProfil = () => {
   const uid = useContext(UidContext);
@@ -11,14 +12,15 @@ const UpdateProfil = () => {
   const [firstName, setFirstName] = useState(userData.firstName);
   const [lastName, setLastName] = useState(userData.lastName);
   const [email, setEmail] = useState(userData.email);
-  const [bio, setBio] = useState(userData.email);
+  const [bio, setBio] = useState(userData.bio);
   const [isUpdating, setIsUpdating] = useState(false);
   const dispatch = useDispatch();
 
-  const handleProfil = () => {
+  const handleProfil = (e) => {
+    e.preventDefault();
     axios({
-      method: "put",
-      url: `api/user/${uid}`,
+      method: "PUT",
+      url: `${process.env.REACT_APP_API_URL}api/user/${uid}`,
       withCredentials: true,
       data: {
         firstName,
@@ -27,13 +29,13 @@ const UpdateProfil = () => {
         bio,
       },
     }).then(() => {
-      dispatch(getUsers);
+      dispatch(getUser);
       setIsUpdating(false);
+      window.location.reload();
     });
   };
-
   return (
-    <div>
+    <div className="user-information-container">
       <h2> Bonjour {userData.name}</h2>
       <ul>
         <img
@@ -46,8 +48,9 @@ const UpdateProfil = () => {
         <div className="flex column content-container">
           {isUpdating === false && (
             <>
+              {" "}
+              <h3 className="inline-flex row"> Informations personelles </h3>
               <p className="content">
-                <h3 className="inline-flex row"> Informations personelles </h3>
                 <img
                   src="./img/icons/pen.svg"
                   alt="modifier"

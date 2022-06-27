@@ -24,9 +24,12 @@ const Thread = () => {
     <div className="thread-container">
       <ul>
         {!isEmpty(posts[0]) &&
-          posts.map((post) => {
-            return <Card post={post} key={post.id} />;
-          })}
+          posts
+            .slice(0)
+            .reverse()
+            .map((post) => {
+              return <Card post={post} key={post.id} />;
+            })}
       </ul>
     </div>
   );

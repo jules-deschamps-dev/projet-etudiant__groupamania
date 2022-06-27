@@ -32,6 +32,7 @@ const User = db.define("users", {
     defaultValue: "./uploads/profil/user.png",
   },
   bio: { type: Sequelize.TEXT, defaultValue: "" },
+  //isAdmin: { type: Sequelize.BOOLEAN, defaultValue: false },
   createdAt: Sequelize.DATE,
   updatedAt: Sequelize.DATE,
 });

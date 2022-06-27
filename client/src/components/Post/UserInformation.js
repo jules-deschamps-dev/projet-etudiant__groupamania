@@ -7,30 +7,36 @@ const UserInformation = (props) => {
 
   return (
     <div className="info-container">
-      <div className="picture-container">
-        <img
-          src={
-            !isEmpty(usersData[0]) &&
-            usersData
-              .map((user) => {
-                if (user.id === props.author) return user.picture;
-                else return null;
-              })
-              .join("") //replace "," by ""
-          }
-          alt="Avatar utilisateur"
-          className="limit-width "
-        />
-
-        <span className="author flex">
-          {!isEmpty(usersData[0]) &&
-            usersData.map((user) => {
-              if (user.id === props.author)
-                return user.firstName + " " + user.lastName;
+      <img
+        src={
+          !isEmpty(usersData[0]) &&
+          usersData
+            .map((user) => {
+              if (user.id === props.author) return user.picture;
               else return null;
-            })}
-        </span>
-      </div>
+            })
+            .join("") //replace "," by ""
+        }
+        alt="Avatar utilisateur"
+        className="picture limit-width "
+      />
+
+      <span className="author flex">
+        {!isEmpty(usersData[0]) &&
+          usersData.map((user) => {
+            if (user.id === props.author)
+              return user.firstName + " " + user.lastName;
+            else return null;
+          })}
+      </span>
+
+      <span className="bio">
+        {!isEmpty(usersData[0]) &&
+          usersData.map((user) => {
+            if (user.id === props.author) return user.bio;
+            else return null;
+          })}
+      </span>
     </div>
   );
 };
