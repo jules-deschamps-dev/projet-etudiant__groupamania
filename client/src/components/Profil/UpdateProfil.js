@@ -13,7 +13,10 @@ const UpdateProfil = () => {
   const [lastName, setLastName] = useState(userData.lastName);
   const [email, setEmail] = useState(userData.email);
   const [bio, setBio] = useState(userData.bio);
+  const [departement, setDepartement] = useState(userData.departement);
   const [isUpdating, setIsUpdating] = useState(false);
+
+  const error = useSelector((state) => state.errorsReducer.userErrors);
   const dispatch = useDispatch();
 
   const handleProfil = (e) => {
@@ -27,6 +30,7 @@ const UpdateProfil = () => {
         lastName,
         email,
         bio,
+        departement,
       },
     }).then(() => {
       dispatch(getUser);
@@ -34,38 +38,55 @@ const UpdateProfil = () => {
       window.location.reload();
     });
   };
+
+  const cancleUpdate = () => {
+    setIsUpdating(false);
+  };
+
   return (
     <div className="user-information-container">
-      <h2> Bonjour {userData.name}</h2>
-      <ul>
-        <img
-          src={userData.picture}
-          alt="photo de profil"
-          className="profil-picture"
-        />
+      <h2 className="userName"> {userData.name}</h2>
+      <div>
         <UploadImg />
 
         <div className="flex column content-container">
           {isUpdating === false && (
             <>
-              {" "}
-              <h3 className="inline-flex row"> Informations personelles </h3>
-              <p className="content">
+              <div className="flex row margin">
+                <h3 className="inline-flex row"> Informations personelles </h3>
                 <img
-                  src="./img/icons/pen.svg"
+                  src="./img/icons/pen-circle.svg"
                   alt="modifier"
-                  className="icon inline-flex row"
+                  className="icon30 inline-flex row"
                   onClick={() => setIsUpdating(true)}
                 />
+              </div>
+              <div className="flex content">
                 <br />
-                Prénom : {userData.firstName} <br />
-                Nom : {userData.lastName} <br />
-                Département : {userData.bio} <br />
-                email : {userData.email}
-              </p>
+                <div className="flex row margin min-width">
+                  <ul className="flex column txt-right">
+                    <li>Prénom</li>
+                    <li>Nom</li>
+                    <li>Email </li>
+                    <li>Département</li>
+                  </ul>
+                  <ul className="moderate-x-space margin center">
+                    <li> | </li>
+                    <li> | </li>
+                    <li> | </li>
+                    <li> | </li>
+                  </ul>
+                  <ul className="flex column txt-left">
+                    <li>{userData.firstName}</li>
+                    <li>{userData.lastName}</li>
+                    <li>{userData.email}</li>
+                    <li>{userData.departement}</li>
+                  </ul>
+                </div>
+              </div>
             </>
           )}
-          {isUpdating === true && (
+          {isUpdating && (
             <div className="update-name">
               <form onSubmit={handleProfil}>
                 <label className="flex">
@@ -92,19 +113,49 @@ const UpdateProfil = () => {
                   />
                 </label>
 
-                <label className="flex">
-                  Département
-                  <input
-                    onChange={(e) => setBio(e.target.value)}
-                    defaultValue={userData.bio}
-                  />
-                </label>
-                <input type="submit" value="submit" />
+                {userData.isAdmin ? (
+                  <label className="flex">
+                    Département
+                    <img
+                      src="./img/icons/lock.svg"
+                      alt="lock"
+                      className="icon"
+                    />
+                  </label>
+                ) : (
+                  <label className="flex">
+                    Département
+                    <select name="departement">
+                      <option value="Administration">Administration</option>
+                      <option value="Comptabilité">Comptabilité</option>
+                      <option value="Direction">Direction</option>
+                      <option value="Informatique">Informatique</option>
+                      <option value="Logistique">Logistique</option>
+                      <option value="RH">RH</option>
+                      <option value="Ventes">Ventes</option>
+                    </select>
+                    <input
+                      onChange={(e) => setEmail(e.target.value)}
+                      defaultValue={userData.email}
+                    />
+                  </label>
+                )}
+
+                <div className="flex row margin min-width ">
+                  <button onClick={cancleUpdate}>
+                    <img
+                      src="./img/icons/xmark.png"
+                      alt="cancel"
+                      className="h100"
+                    />
+                  </button>
+                  <input type="submit" value="submit" />
+                </div>
               </form>
             </div>
           )}
         </div>
-      </ul>
+      </div>
     </div>
   );
 };

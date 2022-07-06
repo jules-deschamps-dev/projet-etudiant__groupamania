@@ -22,7 +22,7 @@ const User = db.define("users", {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      min: 6,
+      min: 8,
     },
   },
   firstName: { type: Sequelize.STRING, allowNull: false },
@@ -31,8 +31,8 @@ const User = db.define("users", {
     type: Sequelize.STRING,
     defaultValue: "./uploads/profil/user.png",
   },
-  bio: { type: Sequelize.TEXT, defaultValue: "" },
-  //isAdmin: { type: Sequelize.BOOLEAN, defaultValue: false },
+  departement: { type: Sequelize.TEXT, defaultValue: "" },
+  isAdmin: { type: Sequelize.BOOLEAN, defaultValue: false },
   createdAt: Sequelize.DATE,
   updatedAt: Sequelize.DATE,
 });

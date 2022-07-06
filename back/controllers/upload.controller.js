@@ -18,7 +18,6 @@ module.exports.uploadProfil = async (req, res) => {
     return res.status(500).json({ error });
   }
   const fileName = "user" + req.body.userId + ".png";
-  console.log(typeof req.file.buffer);
 
   let writeStream = fs.createWriteStream(
     `${__dirname}/../../client/public/uploads/profil/${fileName}`

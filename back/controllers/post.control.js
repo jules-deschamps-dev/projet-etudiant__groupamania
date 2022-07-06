@@ -1,15 +1,46 @@
 const Post = require("../models/post.model");
 const User = require("../models/auth.model");
-const db = require("../config/db.config");
+const Comment = require("../models/comment.model");
+const Like = require("../models/like.model");
+const fs = require("fs");
+const { promisify } = require("util");
+const { json } = require("body-parser");
+const pipeline = promisify(require("stream").pipeline);
 
 exports.newPost = (req, res) => {
+  let fileName;
   if (req.file) {
-    console.log(req.file);
+    try {
+      if (req.file.size > 512000) throw Error("maxSize");
+      if (
+        req.file.mimetype !== "image/jpg" &&
+        req.file.mimetype !== "image/jpeg" &&
+        req.file.mimetype !== "image/png"
+      )
+        throw Error("invalid file format");
+    } catch (err) {
+      const errors = uploadErrors(err);
+      return res.status(500).json({ errors });
+    }
+    fileName = req.body.author + Date.now() + ".jpg";
+    console.log(fileName);
+
+    let writeStream = fs.createWriteStream(
+      `${__dirname}/../../client/public/uploads/posts/${fileName}`
+    );
+    writeStream.write(req.file.buffer);
+    writeStream.on("finish", () => {
+      console.log("Image postée");
+    });
+
+    writeStream.end();
+  } else {
+    console.log("no FILE !!");
   }
   Post.create({
-    title: req.body.title,
     content: req.body.content,
     author: req.body.author,
+    picture: req.file ? "./uploads/posts/" + fileName : "",
   })
     .then(() => res.status(201).json({ message: "Nouvelle publication !" }))
     .catch((err) => res.status(500).json({ err }));
@@ -41,6 +72,7 @@ module.exports.updatePost = (req, res) => {
   Post.update(
     {
       content: req.body.content,
+      isPinned: req.body.pinned,
     },
     {
       where: { id: req.params.id },
@@ -49,17 +81,62 @@ module.exports.updatePost = (req, res) => {
     .then(res.status(201).json(" Publication mise à jour "))
     .catch((error) => res.status(500).json({ error }));
 };
+/*
+module.exports.pinnedPost = (req, res) => {
+  Post.update(
+    {
+      isPinned: req.body.pinned,
+    },
+    {
+      where: { id: req.params.id },
+    }
+  )
+    .then(res.status(201).json(" Publication épinglée "))
+    .catch((error) => res.status(500).json({ error }));
+};
+*/
 
 module.exports.deletePost = (req, res) => {
-  /*Comment.destroy({
-    where: { node: req.body.id },
+  console.log(req.params.id);
+  Comment.destroy({
+    where: { post: req.params.id },
   })
-    .then(() => {*/
-  Post.destroy({
-    where: { id: req.params.id },
-  })
-    /*})*/
+    .then(() => {
+      Like.destroy({
+        where: { post: req.params.id },
+      });
+    })
+    .then(() => {
+      Post.destroy({
+        where: { id: req.params.id },
+      });
+    })
 
     .then(res.status(200).json(" Publication supprimé ! "))
     .catch((err) => res.status(500).json({ err }));
+};
+
+const uploadErrors = (err) => {
+  let errors = { format: null, maxSize: null };
+  if (err.message.includes("format")) errors.format = "Format incompatible";
+  if (err.message.includes("maxSize"))
+    errors.maxSize = "Le fichier ne doit pas excéder 512ko";
+
+  return errors;
+};
+
+module.exports.handleFile = (req, res) => {
+  try {
+    if (req.file.size > 512000) throw Error("maxSize");
+    if (
+      req.file.mimetype !== "image/jpg" &&
+      req.file.mimetype !== "image/jpeg" &&
+      req.file.mimetype !== "image/png"
+    )
+      throw Error("invalid file format");
+  } catch (err) {
+    console.log("ERROR !!!!!");
+    const errors = uploadErrors(err);
+    return res.status(200).json({ errors });
+  }
 };

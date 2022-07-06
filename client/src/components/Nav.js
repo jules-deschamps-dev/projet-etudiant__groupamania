@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logout from "./Log/Logout";
 import { reload } from "./Utils";
 
@@ -9,7 +9,7 @@ const Nav = () => {
       <div className="icon">
         <NavLink exact to="/">
           <img
-            src="./img/icons/icon-left-font-monochrome-white.svg"
+            src="./img/icons/icon-left-font-monochrome-white.png"
             alt="home-page"
             className="icon"
             onClick={() => reload("/")}

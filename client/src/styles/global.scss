@@ -24,10 +24,15 @@ $tertiary-color : #4E5166;
   $value: calc(50% - $lenght);
   @return ($value);
 }
+@function goldenRatio($lenght) {
+  $goldenNumber: calc($lenght * 1.618);
+  @return ($goldenNumber);
+}
+
 // FONTS
 @font-face {
-  font-family: "capriola";
-  src: url(../assets/fonts/Capriola-Regular.ttf)
+  font-family: "lato";
+  src: url(../assets/fonts/Lato-Regular.ttf)
 }
 
 // SKELETON
@@ -38,7 +43,7 @@ html{
   background-size: cover;
   background-attachment: fixed;
   background-position-y: top;
-  font-family: capriola;
+  font-family: lato;
   margin: 0;
   padding: 0;
   body{
@@ -57,6 +62,10 @@ html{
 .w50{width: 50%;}
 .w40{ width: 40%; }
 .w30{ width: 30%; }
+.w100{ width: 100%;}
+.h100{ height: 100%;}
+.min-width{ width: min-content;}
+.min-height{ height: min-content !important;}
 
 // DISPLAY
 .flex{ display: flex; }
@@ -68,11 +77,34 @@ html{
 .margin-left-auto{margin-left : auto;}
 
 // TEXTE
-h1{font-size: 2rem;}
+h1{font-size: 1.2rem;}
+h3{margin: 0}
 .txt-left{ text-align: left; }
 .txt-right{ text-align: right; }
+.center{ text-align:  center; }
+.italic{ font-style: italic;}
+.bold{ font-weight:  bold;}
+
+// UTILS
+.tiny-x-margin{ margin-left: $tiny-space-px;  margin-right: $tiny-space-px;}
+.moderate-x-space{ width: $moderate-space-px;}
 
 // REFORM
 ul{ padding: 0; }
 li{ list-style: none; }
+textarea{ resize: none;}
 input[type=file]{opacity: 0;}
+button, input[type=submit]{
+  border-radius: 25px;
+  width: 90px;
+  height: 45px;
+  color: white;
+  margin: 1px;
+}
+button[class=cancel]{
+  background-color: $tertiary-color;
+}
+button[class=send], input[type=submit]{
+  background-color: $primary-color;
+}
+

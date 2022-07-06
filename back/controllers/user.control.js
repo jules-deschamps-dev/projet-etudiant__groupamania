@@ -3,7 +3,16 @@ const fs = require("fs");
 
 module.exports.getAllUsers = async (req, res) => {
   const users = await User.findAll({
-    attributes: ["id", "firstName", "lastName", "email", "bio", "picture"],
+    attributes: [
+      "id",
+      "firstName",
+      "lastName",
+      "email",
+      "bio",
+      "picture",
+      "departement",
+      "isAdmin",
+    ],
   });
   res.status(200).json(users);
 };
@@ -21,8 +30,10 @@ module.exports.getOneUser = async (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         picture: user.picture,
+        departement: user.departement,
         email: user.email,
         bio: user.bio,
+        isAdmin: user.isAdmin,
         id: user.id,
       };
       res.status(201).json(userData);
@@ -36,14 +47,13 @@ module.exports.getOneUser = async (req, res) => {
 };
 
 module.exports.update = async (req, res) => {
-  console.log("UPDATE !!!!");
-  console.log(req.body);
   User.update(
     {
       email: req.body.email,
       bio: req.body.bio,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      departement: req.body.departement,
     },
     { where: { id: req.params.id } }
   )

@@ -1,12 +1,68 @@
 
 .user-information-container{
-  background-color: white;
-  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(white, .9);
+  border-radius: 25px;
+  width: max-content;
+  padding-left: 5vw;
+  padding-right: 5vw;
   margin: auto;
+  margin-top: 50px;
+  h3{
+    margin-right: 5px;
+  }
+  .content-container{
+    margin-top: 20px;
+  }
+  .userName{
+    display: flex;
+    margin: auto;
+  }
+  .update-picture-icon{
+    width: 40px;
+  }
+  button{width: 45px; background-color: $tertiary-color; }
+  label{width: fit-content; margin: auto;}
+  input[type=file]{height: 0; width: 0;}
 }
 .profil-picture{
+  display: flex;
   width: 125px;
+  height: 125px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin: auto;
   }
 .icon{
   width: 50px;
 }
+.icon30{
+  width: 30px;
+}
+
+fieldset{
+  background-color: white;
+  width: fit-content;
+}
+label{
+  .icon{
+    width: 15px;
+    height: 15px;
+  }
+}
+
+input[type=radio] {
+  width: min-content; 
+  margin: 0;}
+
+span[value=Admin] {
+  color: red;
+  font-weight: bold;
+}
+
+.adminColor{
+  color: rgb(185, 0, 0);
+  font-weight: bold;
+}
+

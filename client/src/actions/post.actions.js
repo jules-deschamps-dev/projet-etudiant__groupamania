@@ -4,56 +4,83 @@ export const GET_POSTS = "GET_POSTS";
 export const NEW_POSTS = "NEW_POSTS";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
+export const GET_POST_ERRORS = "GET_POST_ERRORS";
+export const GET_UPLOAD_ERRORS = "GET_UPLOAD_ERRORS";
 
 export const getPosts = () => {
-  return (dispatch) => {
-    return axios
-      .get(`${process.env.REACT_APP_API_URL}api/post/`, {
+  return async (dispatch) => {
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}api/post/`, {
         withCredentials: true,
-      })
-      .then((res) => {
-        dispatch({ type: GET_POSTS, payload: res.data });
-      })
-      .catch((err) => console.log(err));
+      });
+      dispatch({ type: GET_POSTS, payload: res.data });
+    } catch (err) {
+      return console.log(err);
+    }
   };
 };
 
 export const newPost = (data) => {
   return (dispatch) => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}api/post/create`, data, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        dispatch({ type: GET_POSTS, payload: res.data });
-      })
-      .catch((err) => console.log(err));
+      .post(`${process.env.REACT_APP_API_URL}api/post/create`, data)
+      .then(dispatch({ type: GET_POST_ERRORS, payload: "" }))
+      .catch((err) => {
+        if (err.response.data.errors) {
+          dispatch({
+            type: GET_POST_ERRORS,
+            payload: err.response.data.errors,
+          });
+        } else {
+          dispatch({ type: GET_POST_ERRORS, payload: "" });
+        }
+      });
   };
 };
 
-export const updatePost = (postId, content) => {
+export const handleFile = (file) => {
   return (dispatch) => {
-    return axios({
-      method: "put",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
-      data: { content },
-    })
-      .then((res) => {
-        dispatch({ type: UPDATE_POST, payload: { content, postId } });
-      })
-      .catch((err) => console.log(err));
+    return axios
+      .post(`${process.env.REACT_APP_API_URL}api/post/upload`, file)
+      .then(dispatch({ type: GET_POST_ERRORS, payload: "" }))
+      .catch((err) => {
+        if (err.response.data.errors) {
+          dispatch({
+            type: GET_UPLOAD_ERRORS,
+            payload: err.response.data.errors,
+          });
+        } else {
+          dispatch({ type: GET_UPLOAD_ERRORS, payload: "" });
+        }
+      });
+  };
+};
+
+export const updatePost = (postId, content, isPinned) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios({
+        method: "put",
+        url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
+        data: { content, isPinned },
+      });
+      dispatch({ type: UPDATE_POST, payload: { content, isPinned, postId } });
+    } catch (err) {
+      return console.log(err);
+    }
   };
 };
 
 export const deletePost = (id) => {
-  return (dispatch) => {
-    return axios({
-      method: "delete",
-      url: `${process.env.REACT_APP_API_URL}api/post/${id}`,
-    })
-      .then((res) => {
-        dispatch({ type: DELETE_POST, payload: { id } });
-      })
-      .catch((err) => console.log(err));
+  return async (dispatch) => {
+    try {
+      const res = await axios({
+        method: "delete",
+        url: `${process.env.REACT_APP_API_URL}api/post/${id}`,
+      });
+      dispatch({ type: DELETE_POST, payload: { id } });
+    } catch (err) {
+      return console.log(err);
+    }
   };
 };

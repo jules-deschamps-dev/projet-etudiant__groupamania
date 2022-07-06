@@ -4,14 +4,14 @@ const authCtrl = require("../controllers/auth.control");
 const userCtrl = require("../controllers/user.control");
 const checkUser = require("../middlewares/auth.middleware");
 const uploadController = require("../controllers/upload.controller");
+const password = require("../middlewares/password.milddleware");
 
-//const multer = require("../middlewares/multer.config");
 const multer = require("multer");
 const upload = multer();
 //const password = require("../middleware/password");
 
 // AUTHENTIFICATION
-router.post("/register", authCtrl.signup); // CREATE
+router.post("/register", password, authCtrl.signup); // CREATE
 router.post("/login", authCtrl.login);
 router.get("/logout", authCtrl.logout);
 

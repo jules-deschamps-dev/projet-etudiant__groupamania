@@ -7,8 +7,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const emailError = document.getElementById("email-error");
-    const passwordError = document.getElementById("password-error");
+    const error = document.getElementById("errors");
 
     await axios({
       method: "post",
@@ -20,24 +19,20 @@ const Login = () => {
       },
     })
       .then((res) => {
-        if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.email;
-          passwordError.innerHTML = res.data.errors.password;
-        } else {
-          window.location = "/";
-          console.log(res);
-          //localStorage.setItem("token", res.data.token);
-          document.cookie = "token=" + res.data.token;
-        }
+        window.location = "/";
+        console.log(res);
+        document.cookie = "token=" + res.data.token;
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
+        error.innerHTML = err.response.data.error;
       });
   };
 
   return (
     <div id="connexionBloc">
       <h1> Connexion </h1>
+      <div id="errors" className="errors"></div>
       <form
         action=""
         onSubmit={handleLogin}
@@ -45,41 +40,41 @@ const Login = () => {
         className="flex column"
       >
         <div className="flex row">
-          <div className="flex column w50 txt-right">
-            <label htmlFor="text"> Email </label>
+          <div className="flex column margin txt-right">
+            <label htmlFor="text">
+              Email
+              <input
+                type="text"
+                name="email"
+                id="email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+              />{" "}
+            </label>
             <br />
-            <label htmlFor="text"> Mot de passe </label>
-          </div>
-
-          <div className="flex column w40 txt-left">
-            <input
-              type="text"
-              name="email"
-              id="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              required
-            />
-            <div id="email-error"></div>
-            <br />
-            <input
-              type="password"
-              name="password"
-              id="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              required
-            />
-            <div id="password-error"></div>
+            <label htmlFor="text">
+              Mot de passe
+              <input
+                type="password"
+                name="password"
+                id="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required
+              />{" "}
+            </label>
           </div>
         </div>
-        <input
-          type="submit"
-          value="Connexion"
-          //onClick={connect()}
-          id="submitConnexionButton"
-          className="margin w30"
-        />
+        <div className="margin">
+          <input
+            type="submit"
+            value="Connexion"
+            //onClick={connect()}
+            id="submitConnexionButton"
+            className="flex margin w30"
+          />
+        </div>
       </form>
     </div>
   );

@@ -44,13 +44,8 @@ app.use(
   })
 );
 app.get("*", checkUser);
-/*
-app.get("*", checkUser, (req, res) => {
-  res.status(200).json(res.locals.user);
-});
-*/
+
 app.get("/token", requireAuth, (req, res) => {
-  //res.status(200).json(res.locals.user);
   res.status(200).json(res.locals.user);
 });
 

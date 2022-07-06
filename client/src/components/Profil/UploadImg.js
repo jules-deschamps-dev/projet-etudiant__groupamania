@@ -4,8 +4,10 @@ import { uploadPicture } from "../../actions/user.actions";
 
 const UploadImg = () => {
   const [file, setFile] = useState();
+  const [isUpdating, setIsUpdating] = useState(false);
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userReducer);
+  const error = useSelector((state) => state.errorsReducer.postErrors);
 
   const handlePicture = (e) => {
     e.preventDefault();
@@ -15,20 +17,46 @@ const UploadImg = () => {
     data.append("file", file);
 
     dispatch(uploadPicture(data, userData.id));
+    setIsUpdating(false);
+  };
+
+  const cancleUpload = () => {
+    setFile();
+    setIsUpdating(false);
   };
 
   return (
-    <form action="" onSubmit={handlePicture} className="upload-pic">
-      <label htmlFor="file">Changer d'image</label>
-      <input
-        type="file"
-        id="file"
-        name="file"
-        accept=".jpg, .jpeg, .png"
-        onChange={(e) => setFile(e.target.files[0])}
+    <div>
+      <img
+        src={userData.picture}
+        alt="photo de profil"
+        className="profil-picture"
       />
-      <input type="submit" value="Envoyer" />
-    </form>
+
+      <form action="" onSubmit={handlePicture} className="flex column">
+        <label htmlFor="file" className="">
+          Modifier la photo de profil
+        </label>
+        <input
+          type="file"
+          id="file"
+          name="file"
+          accept=".jpg, .jpeg, .png"
+          onChange={(e) => setFile(e.target.files[0])}
+          onClick={() => setIsUpdating(true)}
+        />
+
+        {isUpdating && (
+          <div className="flex row margin">
+            <button onClick={cancleUpload}>
+              <img src="./img/icons/xmark.png" alt="cancel" className="h100" />
+            </button>
+            <input type="submit" value="Envoyer" />
+          </div>
+        )}
+      </form>
+      <span>{error.maxSize}</span>
+    </div>
   );
 };
 

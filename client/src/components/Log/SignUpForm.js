@@ -6,38 +6,43 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
+
+  const error = document.getElementById("error");
 
   const handleRegister = (e) => {
     e.preventDefault();
-    const emailError = document.getElementById("email-error");
-    const passwordError = document.getElementById("password-error");
-    axios({
-      method: "post",
-      url: `api/user/register`,
-      withCredentials: true,
-      data: {
-        email,
-        password,
-        lastName,
-        firstName,
-      },
-    })
-      .then((res) => {
-        if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.email;
-          passwordError.innerHTML = res.data.errors.password;
-        } else {
-          window.location = "/";
-        }
+    if (password !== checkPassword)
+      error.innerHTML = "Les mots de passe ne correspondent pas";
+    else {
+      axios({
+        method: "post",
+        url: `api/user/register`,
+        withCredentials: true,
+        data: {
+          email,
+          password,
+          lastName,
+          firstName,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          window.location = "/";
+        })
+        .catch((err) => {
+          error.innerHTML = err.response.data.error;
+          if (err.response.data.error.email)
+            error.innerHTML = err.response.data.error.email;
+          //error.innerHTML = err.response.data.erreur;
+          //console.log(err.response.data);
+        });
+    }
   };
 
   return (
     <div id="connexionBloc">
       <h1> Inscription </h1>
+      <p id="error" className="errors"></p>
       <form
         action=""
         onSubmit={handleRegister}
@@ -45,58 +50,73 @@ const Signup = () => {
         className="flex column"
       >
         <div className="flex row">
-          <div className="flex column w50 txt-right">
-            <label htmlFor="text"> Email </label>
-            <label htmlFor="text"> Mot de passe </label>
-            <label htmlFor="text"> Nom </label>
-            <label htmlFor="text"> Prénom </label>
-          </div>
-
-          <div className="flex column w40 txt-left">
-            <input
-              type="text"
-              name="email"
-              id="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              required
-            />
-            <div id="email-error"></div>
-            <br />
-            <input
-              type="password"
-              name="password"
-              id="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              required
-            />
-            <input
-              type="text"
-              name="lastName"
-              id="lastName"
-              onChange={(e) => setLastName(e.target.value)}
-              value={lastName}
-              required
-            />
-            <input
-              type="text"
-              name="firstName"
-              id="firstName"
-              onChange={(e) => setFirstName(e.target.value)}
-              value={firstName}
-              required
-            />
-            <div id="password-error"></div>
+          <div className="flex column margin regiser-form txt-right">
+            <label htmlFor="text">
+              Email
+              <input
+                type="email"
+                name="email"
+                id="email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+              />
+            </label>
+            <label htmlFor="text">
+              Mot de passe
+              <input
+                type="password"
+                name="password"
+                id="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required
+              />
+            </label>
+            <label htmlFor="text">
+              Confirmation
+              <input
+                type="password"
+                name="checkPassword"
+                id="checkPassword"
+                onChange={(e) => setCheckPassword(e.target.value)}
+                value={checkPassword}
+                required
+              />
+            </label>
+            <label htmlFor="text">
+              Prénom
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                onChange={(e) => setFirstName(e.target.value)}
+                value={firstName}
+                required
+              />
+            </label>
+            <label htmlFor="text">
+              Nom
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                onChange={(e) => setLastName(e.target.value)}
+                value={lastName}
+                required
+              />
+            </label>
           </div>
         </div>
-        <input
-          type="submit"
-          value="S'inscrire"
-          //onClick={connect()}
-          id="submitConnexionButton"
-          className="margin w30"
-        />
+        <div className="margin">
+          <input
+            type="submit"
+            value="S'inscrire"
+            //onClick={connect()}
+            id="submitConnexionButton"
+            className="margin w30"
+          />
+        </div>
       </form>
     </div>
   );

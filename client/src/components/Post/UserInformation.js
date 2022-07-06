@@ -4,6 +4,7 @@ import { isEmpty } from "../Utils";
 
 const UserInformation = (props) => {
   const usersData = useSelector((state) => state.usersReducer);
+  let admin = "";
 
   return (
     <div className="info-container">
@@ -33,8 +34,16 @@ const UserInformation = (props) => {
       <span className="bio">
         {!isEmpty(usersData[0]) &&
           usersData.map((user) => {
-            if (user.id === props.author) return user.bio;
-            else return null;
+            if (user.id === props.author) {
+              {
+                user.isAdmin ? (admin = "adminColor") : (admin = "");
+              }
+              /*
+              if (user.isAdmin) admin = "admin";
+              else admin = "";
+              */
+              return <span className={admin}> {user.departement} </span>;
+            } else return null;
           })}
       </span>
     </div>

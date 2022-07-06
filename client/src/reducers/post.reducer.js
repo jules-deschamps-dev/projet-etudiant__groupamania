@@ -12,6 +12,7 @@ export default function postReducer(state = initialState, action) {
           return {
             ...post,
             content: action.payload.content,
+            isPinned: action.payload.isPinned,
           };
         } else return post;
       });
