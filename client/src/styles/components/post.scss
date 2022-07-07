@@ -8,10 +8,13 @@
   padding-bottom: 20px;
   margin-bottom: 20px;
   background-color: rgba($color: white, $alpha: .9);
+  width: fit-content;
 
   .card-container{
     position: relative;
-    width: clamp(200px, 60vw, 1220px);
+    display: flex;
+    flex-direction: row;
+    width: clamp(320px, 60vw, 1220px);
     min-height: 125px;
     border-radius: 15px;
     margin-bottom: 15px;
@@ -22,6 +25,8 @@
       width: 30px;
       height: 30px;}
     .info-container{
+      display: flex;
+      flex-direction: column;
       width: 20%;
       margin: auto;
       .picture{
@@ -30,7 +35,6 @@
         margin: auto;
         border-radius: 15px;
         border: solid 2px white;
-        overflow: hidden;
         object-fit: cover;
       }
       .author{
@@ -55,16 +59,17 @@
         top: -20px;
         rotate: 30deg;
         }
-    }
       .content{
         position: relative;
         font-style: normal;
         margin-left: 10px;
         margin-right: 10px;
+      }
       .image{
         width: 90%;
       }
     }
+    
     .info-post-container{
       width: 15%;
       text-align: right;
@@ -109,53 +114,84 @@
     height: 50px;
   }
 }
-  .import-btn{
-    width: 50px;
-    height: 50px;
-  }
-  .user-info{
-    height: 50px;
-    width: 50px;
-  }
-  .icon-picture{
-    width: 50px;
-  }
+.import-btn{
+  width: 50px;
+  height: 50px;
+}
+.user-info{
+  height: 50px;
+  width: 50px;
+}
+.icon-picture{
+  width: 50px;
+}
 
+.picture{
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  border: solid 2px white;
+  object-fit: cover;
+}
+
+.new-comment-txtarea{
+  width: 80%;
+}
+.comment{
+  display: flex;
+  width: 80%;
+  text-overflow: ellipsis;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dotted black;
   .picture{
-    width: 50px;
-    height: 50px;
+    width: 40px !important;
+    height: 40px !important;
     border-radius: 15px;
-    border: solid 2px white;
+    border: none !important;
     overflow: hidden;
     object-fit: cover;
+    margin-right: 10px;
   }
-  
-  .new-comment-txtarea{
-    width: 80%;
+  .author{
+    font-size: .8rem;
+    font-style: italic;
   }
-  .comment{
-    display: flex;
-    width: 80%;
+  .comment-content{
+    max-width: 80%;
     text-overflow: ellipsis;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    border-bottom: 1px dotted black;
-    .picture{
-      width: 40px !important;
-      height: 40px !important;
-      border-radius: 15px;
-      border: none !important;
-      overflow: hidden;
-      object-fit: cover;
-      margin-right: 10px;
+  }
+}
+  
+@media screen and (max-width: 738px) {
+  .card-container{
+    flex-direction: column !important;
+    .info-container{
+      flex-direction: row !important;
+      width: 100% !important;
+      .info-user-txt-container{
+        width: 75%;
+      }
     }
-    .author{
-      font-size: .8rem;
-      font-style: italic;
+    .content-container{
+      width: 100% !important;
     }
-    .comment-content{
-      max-width: 80%;
-      text-overflow: ellipsis;
+    .info-post-container{
+      border-left: none !important;
+      border-top: 1px dotted black;
+      display: flex;
+      direction: row;
+      padding-top: 10px;
+      width: 100% !important;
+      .date {
+        margin: auto;
+      }
+      .post-attribut-container{
+        margin: auto !important;
+      }
     }
   }
-  
+  .textarea-container{
+    width: 95% !important;
+  }
+}

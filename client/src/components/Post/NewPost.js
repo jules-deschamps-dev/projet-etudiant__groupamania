@@ -47,7 +47,7 @@ const NewPost = () => {
             <img
               src={userData.picture}
               alt="avatar utilisateur"
-              className=" picture "
+              className="picture"
             />
             <textarea
               name="message"
@@ -83,9 +83,10 @@ const NewPost = () => {
                 alt="Avatar utilisateur"
                 className="picture"
               />
-
-              <span className="author flex">{userData.name}</span>
-              <span className="bio">{userData.departement}</span>
+              <div className="info-user-txt-container">
+                <span className="author flex">{userData.name}</span>
+                <span className="bio">{userData.departement}</span>
+              </div>
             </div>
 
             <div className="content-container">

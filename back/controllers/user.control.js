@@ -8,7 +8,6 @@ module.exports.getAllUsers = async (req, res) => {
       "firstName",
       "lastName",
       "email",
-      "bio",
       "picture",
       "departement",
       "isAdmin",

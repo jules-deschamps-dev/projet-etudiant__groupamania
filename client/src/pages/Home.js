@@ -19,9 +19,7 @@ const Home = () => {
           </div>
         </>
       ) : (
-        <div>
-          <Log signin={true} signup={false} />
-        </div>
+        <Log signin={true} signup={false} />
       )}
     </>
   );

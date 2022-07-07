@@ -22,30 +22,28 @@ const UserInformation = (props) => {
         className="picture limit-width "
       />
 
-      <span className="author flex">
-        {!isEmpty(usersData[0]) &&
-          usersData.map((user) => {
-            if (user.id === props.author)
-              return user.firstName + " " + user.lastName;
-            else return null;
-          })}
-      </span>
+      <div className="info-user-txt-container">
+        <span className="author flex">
+          {!isEmpty(usersData[0]) &&
+            usersData.map((user) => {
+              if (user.id === props.author)
+                return user.firstName + " " + user.lastName;
+              else return null;
+            })}
+        </span>
 
-      <span className="bio">
-        {!isEmpty(usersData[0]) &&
-          usersData.map((user) => {
-            if (user.id === props.author) {
-              {
-                user.isAdmin ? (admin = "adminColor") : (admin = "");
-              }
-              /*
-              if (user.isAdmin) admin = "admin";
-              else admin = "";
-              */
-              return <span className={admin}> {user.departement} </span>;
-            } else return null;
-          })}
-      </span>
+        <span className="bio">
+          {!isEmpty(usersData[0]) &&
+            usersData.map((user) => {
+              if (user.id === props.author) {
+                {
+                  user.isAdmin ? (admin = "adminColor") : (admin = "");
+                }
+                return <span className={admin}> {user.departement} </span>;
+              } else return null;
+            })}
+        </span>
+      </div>
     </div>
   );
 };

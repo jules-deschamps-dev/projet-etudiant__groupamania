@@ -28,11 +28,11 @@ const App = () => {
   });
 
   return (
-    <div>
+    <>
       <UidContext.Provider value={uid}>
         <Routes />
       </UidContext.Provider>
-    </div>
+    </>
   );
 };
 

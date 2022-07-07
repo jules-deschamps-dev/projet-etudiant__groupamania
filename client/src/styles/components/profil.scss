@@ -25,6 +25,7 @@
   button{width: 45px; background-color: $tertiary-color; }
   label{width: fit-content; margin: auto;}
   input[type=file]{height: 0; width: 0;}
+  input:disabled{cursor: not-allowed;}
 }
 .profil-picture{
   display: flex;

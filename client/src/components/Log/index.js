@@ -16,7 +16,7 @@ const Log = (props) => {
   };
 
   return (
-    <div className="log-container flex column">
+    <div className="log-container">
       <ul className="log-list flex row">
         <li
           onClick={handleModals}

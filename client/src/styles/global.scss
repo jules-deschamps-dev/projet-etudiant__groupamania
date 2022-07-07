@@ -64,17 +64,20 @@ html{
 .w30{ width: 30%; }
 .w100{ width: 100%;}
 .h100{ height: 100%;}
+.h50{ height: 50%;}
 .min-width{ width: min-content;}
 .min-height{ height: min-content !important;}
+.width-max{ width: max-content;}
 
 // DISPLAY
-.flex{ display: flex; }
-.row{ flex-direction: row; }
-.column{ flex-direction: column; }
-.inline-flex{ display: inline-flex;}
-.margin{ margin: auto; }
-.absolute{position: absolute;}
-.margin-left-auto{margin-left : auto;}
+.flex{ display: flex !important; }
+.row{ flex-direction: row !important; }
+.column{ flex-direction: column !important; }
+.inline-flex{ display: inline-flex !important;}
+.margin{ margin: auto !important; }
+.absolute{ position: absolute !important; }
+.margin-left-auto{ margin-left : auto !important; }
+.margin-left-null{ margin-left: 0 !important;}
 
 // TEXTE
 h1{font-size: 1.2rem;}
@@ -82,14 +85,17 @@ h3{margin: 0}
 .txt-left{ text-align: left; }
 .txt-right{ text-align: right; }
 .center{ text-align:  center; }
+.justify{ text-align: justify;}
 .italic{ font-style: italic;}
 .bold{ font-weight:  bold;}
+.underline{ text-decoration: underline;}
 
 // UTILS
 .tiny-x-margin{ margin-left: $tiny-space-px;  margin-right: $tiny-space-px;}
 .moderate-x-space{ width: $moderate-space-px;}
 
 // REFORM
+p { text-justify: auto;}
 ul{ padding: 0; }
 li{ list-style: none; }
 textarea{ resize: none;}

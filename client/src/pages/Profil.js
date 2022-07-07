@@ -19,9 +19,7 @@ const Profil = () => {
           <UpdateProfil />
         </>
       ) : (
-        <div className="log-container">
-          <Log signin={true} signup={false} />
-        </div>
+        <Log signin={true} signup={false} />
       )}
     </main>
   );

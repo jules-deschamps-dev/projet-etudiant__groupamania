@@ -50,11 +50,11 @@ const Card = ({ post, like }) => {
   }, [usersData]);
 
   return (
-    <li className="card-container flex column" key={post.id}>
+    <li className="card-container" key={post.id}>
       {isLoading ? (
         <p>Charging..</p>
       ) : (
-        <div className="flex row">
+        <>
           <UserInformation author={post.author} />
 
           <div className="flex column content-container">
@@ -75,7 +75,9 @@ const Card = ({ post, like }) => {
                 />
               ))}
 
-            {isUpdating === false && <p className="content">{post.content}</p>}
+            {isUpdating === false && (
+              <p className="content justify">{post.content}</p>
+            )}
             {isUpdating === false && post.picture && (
               <img src={post.picture} className="image margin" />
             )}
@@ -125,7 +127,7 @@ const Card = ({ post, like }) => {
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
       <div>
         {showComments ? (

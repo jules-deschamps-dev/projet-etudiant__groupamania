@@ -4,7 +4,7 @@ import UploadImg from "./UploadImg";
 import { UidContext } from "../AppContext";
 
 import axios from "axios";
-import { getUser, updateProfil } from "../../actions/user.actions";
+import { getUser } from "../../actions/user.actions";
 
 const UpdateProfil = () => {
   const uid = useContext(UidContext);
@@ -15,9 +15,11 @@ const UpdateProfil = () => {
   const [bio, setBio] = useState(userData.bio);
   const [departement, setDepartement] = useState(userData.departement);
   const [isUpdating, setIsUpdating] = useState(false);
-
-  const error = useSelector((state) => state.errorsReducer.userErrors);
   const dispatch = useDispatch();
+
+  const handleSelect = (value) => {
+    setDepartement(value);
+  };
 
   const handleProfil = (e) => {
     e.preventDefault();
@@ -64,19 +66,19 @@ const UpdateProfil = () => {
               <div className="flex content">
                 <br />
                 <div className="flex row margin min-width">
-                  <ul className="flex column txt-right">
+                  <ul className="flex column txt-right width-max">
                     <li>Prénom</li>
                     <li>Nom</li>
                     <li>Email </li>
                     <li>Département</li>
                   </ul>
-                  <ul className="moderate-x-space margin center">
+                  <ul className="moderate-x-space margin center ">
                     <li> | </li>
                     <li> | </li>
                     <li> | </li>
                     <li> | </li>
                   </ul>
-                  <ul className="flex column txt-left">
+                  <ul className="flex column txt-left width-max">
                     <li>{userData.firstName}</li>
                     <li>{userData.lastName}</li>
                     <li>{userData.email}</li>
@@ -89,24 +91,24 @@ const UpdateProfil = () => {
           {isUpdating && (
             <div className="update-name">
               <form onSubmit={handleProfil}>
-                <label className="flex">
-                  Prénom
+                <label className="flex margin">
+                  <span className="w50 txt-right"> Prénom </span>
                   <input
                     onChange={(e) => setFirstName(e.target.value)}
                     defaultValue={userData.firstName}
                   />
                 </label>
 
-                <label className="flex">
-                  Nom
+                <label className="flex margin">
+                  <span className="w50 txt-right"> Nom </span>
                   <input
                     onChange={(e) => setLastName(e.target.value)}
                     defaultValue={userData.lastName}
                   />
                 </label>
 
-                <label className="flex">
-                  Email
+                <label className="flex margin">
+                  <span className="w50 txt-right"> Email </span>
                   <input
                     onChange={(e) => setEmail(e.target.value)}
                     defaultValue={userData.email}
@@ -114,30 +116,65 @@ const UpdateProfil = () => {
                 </label>
 
                 {userData.isAdmin ? (
-                  <label className="flex">
-                    Département
-                    <img
-                      src="./img/icons/lock.svg"
-                      alt="lock"
-                      className="icon"
+                  <label className="flex margin">
+                    <span className="w50 txt-right"> Département </span>
+                    <input
+                      disabled
+                      onChange={(e) => setEmail(e.target.value)}
+                      defaultValue={"Admin"}
                     />
                   </label>
                 ) : (
                   <label className="flex">
-                    Département
-                    <select name="departement">
-                      <option value="Administration">Administration</option>
-                      <option value="Comptabilité">Comptabilité</option>
-                      <option value="Direction">Direction</option>
-                      <option value="Informatique">Informatique</option>
-                      <option value="Logistique">Logistique</option>
-                      <option value="RH">RH</option>
-                      <option value="Ventes">Ventes</option>
+                    <span className="w50 txt-right"> Département </span>
+                    <select id="departement" name="departement">
+                      <option
+                        value="Administration"
+                        onClick={(e) => handleSelect(e.target.value)}
+                      >
+                        Administration
+                      </option>
+                      <option
+                        value="Comptabilité"
+                        onClick={(e) => handleSelect(e.target.value)}
+                      >
+                        Comptabilité
+                      </option>
+                      <option
+                        value="Direction"
+                        onClick={(e) => handleSelect(e.target.value)}
+                      >
+                        Direction
+                      </option>
+                      <option
+                        value="Informatique"
+                        onClick={(e) => handleSelect(e.target.value)}
+                      >
+                        Informatique
+                      </option>
+                      <option
+                        value="Logistique"
+                        onClick={(e) => handleSelect(e.target.value)}
+                      >
+                        Logistique
+                      </option>
+                      <option
+                        value="RH"
+                        onClick={(e) => handleSelect(e.target.value)}
+                      >
+                        RH
+                      </option>
+                      <option
+                        value="Ventes"
+                        onClick={(e) => handleSelect(e.target.value)}
+                      >
+                        Ventes
+                      </option>
+                      <input
+                        onChange={(e) => setBio(e.target.value)}
+                        defaultValue={userData.departement}
+                      />
                     </select>
-                    <input
-                      onChange={(e) => setEmail(e.target.value)}
-                      defaultValue={userData.email}
-                    />
                   </label>
                 )}
 
@@ -146,7 +183,7 @@ const UpdateProfil = () => {
                     <img
                       src="./img/icons/xmark.png"
                       alt="cancel"
-                      className="h100"
+                      className="w50"
                     />
                   </button>
                   <input type="submit" value="submit" />

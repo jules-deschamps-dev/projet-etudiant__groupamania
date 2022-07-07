@@ -29,13 +29,13 @@ const UploadImg = () => {
     <div>
       <img
         src={userData.picture}
-        alt="photo de profil"
+        alt="avatar utilisateur"
         className="profil-picture"
       />
 
-      <form action="" onSubmit={handlePicture} className="flex column">
-        <label htmlFor="file" className="">
-          Modifier la photo de profil
+      <form action="" onSubmit={handlePicture} className="flex margin">
+        <label htmlFor="file" className="italic underline margin">
+          <span> Modifier la photo de profil </span>
         </label>
         <input
           type="file"
@@ -49,7 +49,7 @@ const UploadImg = () => {
         {isUpdating && (
           <div className="flex row margin">
             <button onClick={cancleUpload}>
-              <img src="./img/icons/xmark.png" alt="cancel" className="h100" />
+              <img src="./img/icons/xmark.png" alt="cancel" className="h50" />
             </button>
             <input type="submit" value="Envoyer" />
           </div>
