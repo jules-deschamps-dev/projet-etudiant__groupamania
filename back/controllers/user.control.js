@@ -1,5 +1,4 @@
 const User = require("../models/auth.model");
-const fs = require("fs");
 
 module.exports.getAllUsers = async (req, res) => {
   const users = await User.findAll({
@@ -31,7 +30,6 @@ module.exports.getOneUser = async (req, res) => {
         picture: user.picture,
         departement: user.departement,
         email: user.email,
-        bio: user.bio,
         isAdmin: user.isAdmin,
         id: user.id,
       };
@@ -49,7 +47,6 @@ module.exports.update = async (req, res) => {
   User.update(
     {
       email: req.body.email,
-      bio: req.body.bio,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       departement: req.body.departement,

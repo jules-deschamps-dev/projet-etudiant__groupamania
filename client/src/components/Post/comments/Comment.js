@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { UidContext } from "../../AppContext";
 import { isEmpty } from "../../Utils";
 import DeleteComment from "./DeleteComment";
-import UserInformation from "../UserInformation";
 
 const Comment = (props) => {
   const uid = useContext(UidContext);

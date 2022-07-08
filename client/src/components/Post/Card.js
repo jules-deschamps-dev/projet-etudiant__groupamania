@@ -54,7 +54,7 @@ const Card = ({ post, like }) => {
       {isLoading ? (
         <p>Charging..</p>
       ) : (
-        <>
+        <div className="post-container">
           <UserInformation author={post.author} />
 
           <div className="flex column content-container">
@@ -127,7 +127,7 @@ const Card = ({ post, like }) => {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
       <div>
         {showComments ? (

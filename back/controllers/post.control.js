@@ -72,7 +72,7 @@ module.exports.updatePost = (req, res) => {
   Post.update(
     {
       content: req.body.content,
-      isPinned: req.body.pinned,
+      isPinned: req.body.isPinned,
     },
     {
       where: { id: req.params.id },
@@ -81,20 +81,6 @@ module.exports.updatePost = (req, res) => {
     .then(res.status(201).json(" Publication mise à jour "))
     .catch((error) => res.status(500).json({ error }));
 };
-/*
-module.exports.pinnedPost = (req, res) => {
-  Post.update(
-    {
-      isPinned: req.body.pinned,
-    },
-    {
-      where: { id: req.params.id },
-    }
-  )
-    .then(res.status(201).json(" Publication épinglée "))
-    .catch((error) => res.status(500).json({ error }));
-};
-*/
 
 module.exports.deletePost = (req, res) => {
   console.log(req.params.id);
