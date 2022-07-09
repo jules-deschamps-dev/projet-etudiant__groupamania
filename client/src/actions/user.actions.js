@@ -31,26 +31,6 @@ export const updateProfil = (data, uid) => {
       .catch((err) => console.log("erreur ", err));
   };
 };
-/*
-export const uploadPicture = (data, id) => {
-  return async (dispatch) => {
-    return await axios
-      .post(`${process.env.REACT_APP_API_URL}api/user/upload`, data, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        return axios
-          .get(`${process.env.REACT_APP_API_URL}api/user/${id}`, {
-            withCredentials: true,
-          })
-          .then((res) => {
-            dispatch({ type: UPLOAD_PICTURE, payload: res.data.picture });
-          });
-      })
-      .catch((err) => console.log(err));
-  };
-};
-*/
 
 export const uploadPicture = (data, id) => {
   return (dispatch) => {

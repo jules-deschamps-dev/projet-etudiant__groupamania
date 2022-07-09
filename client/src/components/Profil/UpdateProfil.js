@@ -37,7 +37,7 @@ const UpdateProfil = () => {
     }).then(() => {
       dispatch(getUser);
       setIsUpdating(false);
-      window.location.reload();
+      //window.location.reload();
     });
   };
 
