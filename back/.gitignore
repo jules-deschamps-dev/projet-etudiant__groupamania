@@ -1,4 +1,1 @@
 node_modules
-routes/comment.route.js
-models/comment.model.js
-controllers/comment.control.js
