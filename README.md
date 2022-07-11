@@ -2,7 +2,7 @@ Groupamania - Projet final
 
 INSTALATION
 
-1. Assurez vous d'avoir Server Stack (WAMP, MAMP, LAMP, XAMPP) afin de faire tourner la base de données MySQL sur le port 3306.
+1. Assurez vous d'avoir un Server Stack (WAMP, MAMP, LAMP, XAMPP) afin de faire tourner la base de données MySQL sur le port 3306. Nom de la database : data /Identifiant : root / Mot de passe : root.
 
 2. Lancez le backend en vous rendant dans le dossier "back" depuis le terminal de votre éditeur de code et lancé la commande "nodemon". Le serveur Node se lancera sur le port 5000
 
