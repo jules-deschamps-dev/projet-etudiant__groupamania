@@ -16,13 +16,13 @@ router.post("/login", authCtrl.login);
 router.get("/logout", authCtrl.logout);
 
 // USER
-router.get("/", checkUser.requireAuth, userCtrl.getAllUsers); // READ
-router.get("/:id", checkUser.requireAuth, userCtrl.getOneUser);
-router.put("/:id", checkUser.requireAuth, userCtrl.update); // UPDATE
-router.delete("/:id", checkUser.requireAuth, userCtrl.deleteUser); // DELETE
+router.get("/", checkUser.checkUser, userCtrl.getAllUsers); // READ
+router.get("/:id", checkUser.checkUser, userCtrl.getOneUser);
+router.put("/:id", checkUser.checkUser, userCtrl.update); // UPDATE
+router.delete("/:id", checkUser.checkUser, userCtrl.deleteUser); // DELETE
 router.post(
   "/upload",
-  checkUser.requireAuth,
+  checkUser.checkUser,
   upload.single("file"),
   uploadController.uploadProfil
 );
