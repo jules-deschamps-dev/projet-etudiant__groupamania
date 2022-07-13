@@ -13,7 +13,7 @@ afin d'installer les dépendances
 3. Assurez vous d'avoir un Server Stack (WAMP, MAMP, LAMP, XAMPP) afin de faire tourner la base de données MySQL sur le port 3306.
    Nom de la database : data | Identifiant : root | Mot de passe : root.
 
-4. Lancez le serveur Node depuis le terminal via les commandes
+4. Lancez le serveur Node depuis le terminal via les commandes ### `cd back`
 
 ### `cd back`
 
