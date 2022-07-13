@@ -4,11 +4,9 @@ INSTALLATION
 
 1. Clonez le repository
 
-2. Ouvrez le dossier dans un éditeur de texte tel que Visual Studio Code, ouvrez un terminal depuis l'éditeur et lancez la commande
+2. Ouvrez le dossier dans un éditeur de texte tel que Visual Studio Code puis installez les dépendances en ouvrant un terminal depuis l'éditeur et lancez la commande
 
 > `npm install`
-
-afin d'installer les dépendances
 
 3. Assurez vous d'avoir un Server Stack (WAMP, MAMP, LAMP, XAMPP) afin de faire tourner la base de données MySQL sur le port 3306.
    Nom de la database : data | Identifiant : root | Mot de passe : root.
