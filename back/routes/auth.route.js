@@ -16,10 +16,15 @@ router.post("/login", authCtrl.login);
 router.get("/logout", authCtrl.logout);
 
 // USER
-router.get("/", userCtrl.getAllUsers); // READ
-router.get("/:id", checkUser.requireAuth, userCtrl.getOneUser);
-router.put("/:id", userCtrl.update); // UPDATE
-router.delete("/:id", userCtrl.deleteUser); // DELETE
-router.post("/upload", upload.single("file"), uploadController.uploadProfil);
+router.get("/", checkUser.checkUser, userCtrl.getAllUsers); // READ
+router.get("/:id", checkUser.checkUser, userCtrl.getOneUser);
+router.put("/:id", checkUser.checkUser, userCtrl.update); // UPDATE
+router.delete("/:id", checkUser.checkUser, userCtrl.deleteUser); // DELETE
+router.post(
+  "/upload",
+  checkUser.checkUser,
+  upload.single("file"),
+  uploadController.uploadProfil
+);
 
 module.exports = router;

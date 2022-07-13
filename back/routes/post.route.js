@@ -3,12 +3,23 @@ const router = express.Router();
 const postCtrl = require("../controllers/post.control");
 const multer = require("multer");
 const upload = multer();
+const checkUser = require("../middlewares/auth.middleware");
 
-router.get("/", postCtrl.getAllPosts);
-router.post("/create", upload.single("file"), postCtrl.newPost); // C
-router.get("/:id", postCtrl.getOnePost); // R
-router.put("/:id", postCtrl.updatePost); // U
-router.delete("/:id", postCtrl.deletePost); // D
-router.post("/upload", upload.single("file"), postCtrl.handleFile); // C
+router.get("/", checkUser.requireAuth, postCtrl.getAllPosts);
+router.post(
+  "/create",
+  checkUser.requireAuth,
+  upload.single("file"),
+  postCtrl.newPost
+); // C
+router.get("/:id", checkUser.checkUser, postCtrl.getOnePost); // R
+router.put("/:id", checkUser.checkUser, postCtrl.updatePost); // U
+router.delete("/:id", checkUser.checkUser, postCtrl.deletePost); // D
+router.post(
+  "/upload",
+  checkUser.checkUser,
+  upload.single("file"),
+  postCtrl.handleFile
+); // C
 
 module.exports = router;
