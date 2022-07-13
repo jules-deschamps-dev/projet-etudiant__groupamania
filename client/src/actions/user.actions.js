@@ -24,6 +24,7 @@ export const updateProfil = (data, uid) => {
       method: "put",
       url: `${process.env.REACT_APP_API_URL}api/user/${uid}`,
       data: { data },
+      withCredentials: true,
     })
       .then((res) => {
         dispatch({ type: UPDATE_PROFIL, payload: res.data });
@@ -34,20 +35,33 @@ export const updateProfil = (data, uid) => {
 
 export const uploadPicture = (data, id) => {
   return (dispatch) => {
-    return axios
-      .post(`${process.env.REACT_APP_API_URL}api/user/upload`, data)
-      .then((res) => {
-        if (res.data.errors) {
-          dispatch({ type: GET_USER_ERRORS, payload: res.data.errors });
-        } else {
-          dispatch({ type: GET_USER_ERRORS, payload: "" });
-          return axios
-            .get(`${process.env.REACT_APP_API_URL}api/user/${id}`)
-            .then((res) => {
-              dispatch({ type: UPLOAD_PICTURE, payload: res.data.picture });
-            });
-        }
+    return (
+      axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}api/user/upload`,
+        data: data,
+        withCredentials: true,
       })
-      .catch((err) => console.log(err));
+        //.post(`${process.env.REACT_APP_API_URL}api/user/upload`, data)
+        .then((res) => {
+          if (res.data.errors) {
+            dispatch({ type: GET_USER_ERRORS, payload: res.data.errors });
+          } else {
+            dispatch({ type: GET_USER_ERRORS, payload: "" });
+            return (
+              axios({
+                method: "get",
+                url: `${process.env.REACT_APP_API_URL}api/user/${id}`,
+                withCredentials: true,
+              })
+                //.get(`${process.env.REACT_APP_API_URL}api/user/${id}`)
+                .then((res) => {
+                  dispatch({ type: UPLOAD_PICTURE, payload: res.data.picture });
+                })
+            );
+          }
+        })
+        .catch((err) => console.log(err))
+    );
   };
 };

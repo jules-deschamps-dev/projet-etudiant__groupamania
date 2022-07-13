@@ -21,23 +21,29 @@ export const getPosts = () => {
 };
 
 export const newPost = (data) => {
-  return (dispatch) => {
-    return axios
-      .post(`${process.env.REACT_APP_API_URL}api/post/create`, data)
-      .then(dispatch({ type: GET_POST_ERRORS, payload: "" }))
-      .catch((err) => {
-        if (err.response.data.errors) {
-          dispatch({
-            type: GET_POST_ERRORS,
-            payload: err.response.data.errors,
-          });
-        } else {
-          dispatch({ type: GET_POST_ERRORS, payload: "" });
-        }
+  return async (dispatch) => {
+    try {
+      const res = await axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}api/post/create`,
+        data: data,
+        withCredentials: true,
       });
+      dispatch({ type: GET_POST_ERRORS, payload: "" });
+    } catch (err) {
+      if (err.response.data.errors) {
+        dispatch({
+          type: GET_POST_ERRORS,
+          payload: err.response.data.errors,
+        });
+      } else {
+        dispatch({ type: GET_POST_ERRORS, payload: "" });
+      }
+    }
   };
 };
 
+/*
 export const handleFile = (file) => {
   return (dispatch) => {
     return axios
@@ -54,7 +60,7 @@ export const handleFile = (file) => {
         }
       });
   };
-};
+};*/
 
 export const updatePost = (postId, content, isPinned) => {
   return async (dispatch) => {
@@ -63,6 +69,7 @@ export const updatePost = (postId, content, isPinned) => {
         method: "put",
         url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
         data: { content, isPinned },
+        withCredentials: true,
       });
       dispatch({ type: UPDATE_POST, payload: { content, isPinned, postId } });
     } catch (err) {
@@ -77,6 +84,7 @@ export const deletePost = (id) => {
       const res = await axios({
         method: "delete",
         url: `${process.env.REACT_APP_API_URL}api/post/${id}`,
+        withCredentials: true,
       });
       dispatch({ type: DELETE_POST, payload: { id } });
     } catch (err) {

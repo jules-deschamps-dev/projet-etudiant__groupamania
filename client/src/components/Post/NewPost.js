@@ -17,7 +17,7 @@ const NewPost = () => {
     setFile(e.target.files[0]);
     const data = new FormData();
     if (file) data.append("file", file);
-    dispatch(handleFile(data));
+    //dispatch(handleFile(data));
   };
 
   const handlePost = async () => {

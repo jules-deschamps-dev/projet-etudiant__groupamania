@@ -27,6 +27,7 @@ export const updateComment = (id, content) => {
         method: "put",
         url: `${process.env.REACT_APP_API_URL}api/comment/${id}`,
         data: { content },
+        withCredentials: true,
       });
       dispatch({ type: UPDATE_COMMENT, payload: { content, id } });
     } catch (err) {
@@ -41,6 +42,7 @@ export const deleteComment = (id) => {
       const res = await axios({
         method: "delete",
         url: `${process.env.REACT_APP_API_URL}api/comment/${id}`,
+        withCredentials: true,
       });
       dispatch({ type: DELETE_COMMENT, payload: { id } });
     } catch (err) {

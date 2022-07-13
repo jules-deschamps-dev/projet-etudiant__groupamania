@@ -10,7 +10,8 @@ module.exports.checkUser = (req, res, next) => {
       if (err) {
         res.locals.user = null;
         res.cookie("token", "", { maxAge: 1 });
-        next();
+        console.log("erreur !!!");
+        res.status(500).json("Vous avez été deconnecté");
       } else {
         let user = await User.findOne({
           where: {
@@ -24,8 +25,8 @@ module.exports.checkUser = (req, res, next) => {
   } else {
     console.log("non identifié");
     res.locals.user = null;
-    next();
-    //res.status(500).json("Vous n'êtes pas identifié");
+    //next();
+    res.status(500).json("Vous n'êtes pas identifié");
   }
 };
 
